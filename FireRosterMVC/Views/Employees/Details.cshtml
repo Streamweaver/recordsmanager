@@ -1,0 +1,183 @@
+﻿@model FireRosterMVC.Models.tblEmployee
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>@Html.DisplayFor(model => model.DisplayName)</h2>
+<div class="clearfix">
+    <div class="col-md-6 panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Profile Information</h3></div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.SSN)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SSN)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NamePrefix)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NamePrefix)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NameSuffix)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NameSuffix)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Race)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Race)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Sex)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Sex)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DateOfBirth)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RankDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RankDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CareerDevelopmentLevel)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CareerDevelopmentLevel)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CareerDevelopmentDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CareerDevelopmentDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EmploymentDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EmploymentDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TerminationDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TerminationDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.isMilitaryLeave)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.isMilitaryLeave)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RosterRank)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RosterRank)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HenricoUserID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HenricoUserID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.OracleHrID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.OracleHrID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.BadgeNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BadgeNumber)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+    <div class="col-md-6 panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Contact Info</h3></div>
+        <div class="panel-body">
+            <dl>
+                <dt>Address(es):</dt>
+                @foreach (var addr in Model.tblEmployeeAddresses)
+                {
+                    <address>
+                        @if (!string.IsNullOrEmpty(addr.AddressLine1))
+                        {
+                             @addr.AddressLine1 <br />
+                        }
+                        @if (!string.IsNullOrEmpty(addr.AddressLine2))
+                        {
+                            @addr.AddressLine2 <br />
+                        }
+                        @if (!string.IsNullOrEmpty(addr.City))
+                        {
+                            @addr.City
+                        },
+                        @if (!string.IsNullOrEmpty(addr.State))
+                        {
+                            @addr.State
+                        }
+                        @if (!string.IsNullOrEmpty(addr.Zip))
+                        {
+                            @addr.Zip
+                        }
+                    </address>
+                }
+            </dl>
+
+        </div>
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

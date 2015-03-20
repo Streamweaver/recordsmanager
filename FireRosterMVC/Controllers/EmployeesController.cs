@@ -38,8 +38,8 @@ namespace FireRosterMVC.Controllers
                 );
 
             var staff = from s in db.tblEmployees
+                            .Where(s => s.isRemoved == false)
                         select s;
-            staff = staff.Where(s => s.isRemoved == false);
 
             if (!String.IsNullOrEmpty(searchString))
             {

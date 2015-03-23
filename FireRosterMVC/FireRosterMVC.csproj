@@ -138,31 +138,33 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RosterController.cs" />
     <Compile Include="Enums\Activestatus.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmployeeMetadata.cs" />
+    <Compile Include="Migrations\201503231355538_Initial.cs" />
+    <Compile Include="Migrations\201503231355538_Initial.Designer.cs">
+      <DependentUpon>201503231355538_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503231500478_CreateAddress.cs" />
+    <Compile Include="Migrations\201503231500478_CreateAddress.Designer.cs">
+      <DependentUpon>201503231500478_CreateAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503231529263_CreatePhoneNumbers.cs" />
+    <Compile Include="Migrations\201503231529263_CreatePhoneNumbers.Designer.cs">
+      <DependentUpon>201503231529263_CreatePhoneNumbers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\FireRosterDB.cs" />
-    <Compile Include="Models\tblCertificationAgency.cs" />
-    <Compile Include="Models\tblCertificationState.cs" />
-    <Compile Include="Models\tblEmergencyContact.cs" />
-    <Compile Include="Models\tblEmployee.cs" />
-    <Compile Include="Models\tblEmployeeAddress.cs" />
-    <Compile Include="Models\tblEmployeeAttribute.cs" />
-    <Compile Include="Models\tblEmployeeAttributeKey.cs" />
-    <Compile Include="Models\tblEmployeePager.cs" />
-    <Compile Include="Models\tblEmployeePhone.cs" />
-    <Compile Include="Models\tblEmployeePhoto.cs" />
-    <Compile Include="Models\tblEmployeePosition.cs" />
-    <Compile Include="Models\tblEmployeeRosterAssignment.cs" />
-    <Compile Include="Models\tblPosition.cs" />
-    <Compile Include="Models\tblRank.cs" />
-    <Compile Include="Models\tblShift.cs" />
-    <Compile Include="Models\tblSkill.cs" />
+    <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\Phone.cs" />
+    <Compile Include="Models\PhoneType.cs" />
+    <Compile Include="Models\Race.cs" />
+    <Compile Include="Models\Staff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,8 +204,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Employees\Index.cshtml" />
-    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\Staff\Details.cshtml" />
     <Content Include="Views\Roster\Create.cshtml" />
     <Content Include="Views\Roster\Delete.cshtml" />
     <Content Include="Views\Roster\Details.cshtml" />
@@ -213,6 +215,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
+    <Folder Include="Views\Photos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -223,6 +226,17 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201503231355538_Initial.resx">
+      <DependentUpon>201503231355538_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503231500478_CreateAddress.resx">
+      <DependentUpon>201503231500478_CreateAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503231529263_CreatePhoneNumbers.resx">
+      <DependentUpon>201503231529263_CreatePhoneNumbers.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

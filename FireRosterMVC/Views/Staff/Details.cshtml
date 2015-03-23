@@ -1,0 +1,161 @@
+﻿@model FireRosterMVC.Models.Staff
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>@Html.DisplayFor(model => model.DisplayName)</h2>
+<div class="clearfix"></div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Personal Information</h3></div>
+        <div class="col-md-4 panel-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.SSN)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SSN)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.NamePrefix)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NamePrefix)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.NameSuffix)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NameSuffix)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Race)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Race.Label)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Gender.Label)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DateOfBirth)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.RankDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.RankDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CareerDevelopmentLevel)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CareerDevelopmentLevel)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CareerDevelopmentDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CareerDevelopmentDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.EmploymentDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.EmploymentDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.TerminationDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TerminationDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.isMilitaryLeave)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.isMilitaryLeave)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.RosterRank)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.RosterRank)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.HenricoUserID)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.HenricoUserID)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.OracleHrID)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.OracleHrID)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.BadgeNumber)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.BadgeNumber)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-4 panel-body">
+            <dl>
+                <dt>Address(es):</dt>
+                @foreach (var addr in Model.Addresses)
+                {
+                    <address>
+                        @if (!string.IsNullOrEmpty(addr.Street1))
+                        {
+                            @addr.Street1 <br />
+                        }
+                        @if (!string.IsNullOrEmpty(addr.Street2))
+                        {
+                            @addr.Street2 <br />
+                        }
+                        @if (!string.IsNullOrEmpty(addr.City))
+                        {
+                            @addr.City
+                        },
+                        @if (!string.IsNullOrEmpty(addr.State))
+                        {
+                            @addr.State
+                        }
+                        @if (!string.IsNullOrEmpty(addr.Zip))
+                        {
+                            @addr.Zip
+                        }
+                    </address>
+                }
+                <dt>Phone Number(s):</dt>
+                @foreach (var phone in Model.PhoneNumbers)
+                {
+                    <div>
+                        <a href="tel:@phone.Number">@phone.Number</a> (@phone.Type.Label)
+                        @if (phone.Primary == true)
+                        { 
+                        <i class="glyphicon glyphicon-ok-sign text-success"></i>
+                        <span class="sr-only">Primary</span>
+                        }
+                    </div>
+                }
+            </dl>
+        </div>
+        <div class="col-md-4 panel-body">
+            <img src="@Url.Action("Index", "Photos", new { id = Model.ID })" width="200" height="225"/>
+        </div>
+    </div>
+<div class="clearfix"></div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

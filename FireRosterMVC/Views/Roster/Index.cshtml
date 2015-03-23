@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.tblEmployee.LastUpdateBy)
+            @Html.DisplayNameFor(model => model.Employee.LastUpdateBy)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.tblRank.LastUpdateBy)
@@ -53,13 +53,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.tblEmployee.LastUpdateBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblRank.LastUpdateBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblShift.LastUpdateBy)
+            @Html.DisplayFor(modelItem => item.Employee.DisplayName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LocationID)

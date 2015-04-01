@@ -1,0 +1,60 @@
+﻿@model IEnumerable<FireRosterMVC.Models.Location>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Locations</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+            (@Html.DisplayNameFor(model => model.Code))
+        </th>
+        <th>
+            Min/Current
+        </th>
+        <th>
+            Group
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "Details", new { id = item.ID })
+            (@Html.DisplayFor(modelItem => item.Code))
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinimumComplement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Group.Label)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+
+        <td>
+            <a href="@Url.Action("Edit", "Edit", new { id=item.ID })">
+                <i class="glyphicon glyphicon-edit"></i>
+                <span class="sr-only">Edit</span>
+            </a>
+            <a href="@Url.Action("Delete", "Delete", new { id=item.ID })">
+                <i class="glyphicon glyphicon-trash"></i>
+                <span class="sr-only">Delete</span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

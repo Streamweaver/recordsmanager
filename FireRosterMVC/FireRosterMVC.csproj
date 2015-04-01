@@ -138,7 +138,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Enums\Activestatus.cs" />
@@ -157,13 +159,48 @@
     <Compile Include="Migrations\201503231529263_CreatePhoneNumbers.Designer.cs">
       <DependentUpon>201503231529263_CreatePhoneNumbers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503241305590_CreateEmergencyContact.cs" />
+    <Compile Include="Migrations\201503241305590_CreateEmergencyContact.Designer.cs">
+      <DependentUpon>201503241305590_CreateEmergencyContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503241945431_CreateRank.cs" />
+    <Compile Include="Migrations\201503241945431_CreateRank.Designer.cs">
+      <DependentUpon>201503241945431_CreateRank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503242014224_CreateLocation.cs" />
+    <Compile Include="Migrations\201503242014224_CreateLocation.Designer.cs">
+      <DependentUpon>201503242014224_CreateLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503251926209_UpdateModificationDateNames.cs" />
+    <Compile Include="Migrations\201503251926209_UpdateModificationDateNames.Designer.cs">
+      <DependentUpon>201503251926209_UpdateModificationDateNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503271328456_CreateSkills.cs" />
+    <Compile Include="Migrations\201503271328456_CreateSkills.Designer.cs">
+      <DependentUpon>201503271328456_CreateSkills.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503301556405_CreatePosition.cs" />
+    <Compile Include="Migrations\201503301556405_CreatePosition.Designer.cs">
+      <DependentUpon>201503301556405_CreatePosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503311803040_ModifyPositionNullFields.cs" />
+    <Compile Include="Migrations\201503311803040_ModifyPositionNullFields.Designer.cs">
+      <DependentUpon>201503311803040_ModifyPositionNullFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\EmergencyContact.cs" />
     <Compile Include="Models\FireRosterDB.cs" />
     <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\LocationGroup.cs" />
     <Compile Include="Models\Phone.cs" />
     <Compile Include="Models\PhoneType.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\PositionStatus.cs" />
     <Compile Include="Models\Race.cs" />
+    <Compile Include="Models\Rank.cs" />
+    <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -211,6 +248,16 @@
     <Content Include="Views\Roster\Details.cshtml" />
     <Content Include="Views\Roster\Edit.cshtml" />
     <Content Include="Views\Roster\Index.cshtml" />
+    <Content Include="Views\Location\Create.cshtml" />
+    <Content Include="Views\Location\Delete.cshtml" />
+    <Content Include="Views\Location\Details.cshtml" />
+    <Content Include="Views\Location\Edit.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Skills\Create.cshtml" />
+    <Content Include="Views\Skills\Delete.cshtml" />
+    <Content Include="Views\Skills\Details.cshtml" />
+    <Content Include="Views\Skills\Edit.cshtml" />
+    <Content Include="Views\Skills\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -236,6 +283,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503231529263_CreatePhoneNumbers.resx">
       <DependentUpon>201503231529263_CreatePhoneNumbers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503241305590_CreateEmergencyContact.resx">
+      <DependentUpon>201503241305590_CreateEmergencyContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503241945431_CreateRank.resx">
+      <DependentUpon>201503241945431_CreateRank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503242014224_CreateLocation.resx">
+      <DependentUpon>201503242014224_CreateLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503251926209_UpdateModificationDateNames.resx">
+      <DependentUpon>201503251926209_UpdateModificationDateNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503271328456_CreateSkills.resx">
+      <DependentUpon>201503271328456_CreateSkills.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503301556405_CreatePosition.resx">
+      <DependentUpon>201503301556405_CreatePosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503311803040_ModifyPositionNullFields.resx">
+      <DependentUpon>201503311803040_ModifyPositionNullFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

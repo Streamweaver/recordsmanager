@@ -6,6 +6,7 @@
 
 <h2>@Html.DisplayFor(model => model.DisplayName)</h2>
 <div class="clearfix"></div>
+
     <div class="panel panel-default">
         <div class="panel-heading"><h3 class="panel-title">Personal Information</h3></div>
         <div class="col-md-4 panel-body">
@@ -77,10 +78,10 @@
                     @Html.DisplayFor(model => model.TerminationDate)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.isMilitaryLeave)
+                    @Html.DisplayNameFor(model => model.MilitaryLeave)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.isMilitaryLeave)
+                    @Html.DisplayFor(model => model.MilitaryLeave)
                 </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.RosterRank)
@@ -109,11 +110,11 @@
             </dl>
         </div>
         <div class="col-md-4 panel-body">
-            <dl>
-                <dt>Address(es):</dt>
+            <ul class="list-group">
+                <li class="list-group-item active"><strong>Address@(Model.Addresses.Count > 1 ? "es" : ""):</strong></li>
                 @foreach (var addr in Model.Addresses)
                 {
-                    <address>
+                <li class="list-group-item">
                         @if (!string.IsNullOrEmpty(addr.Street1))
                         {
                             @addr.Street1 <br />
@@ -134,26 +135,73 @@
                         {
                             @addr.Zip
                         }
-                    </address>
+                </li>
                 }
-                <dt>Phone Number(s):</dt>
+                <li class="list-group-item active"><strong>Phone Number@(Model.PhoneNumbers.Count > 1 ? "s" : ""):</strong></li>
                 @foreach (var phone in Model.PhoneNumbers)
                 {
-                    <div>
-                        <a href="tel:@phone.Number">@phone.Number</a> (@phone.Type.Label)
+                    <li class="list-group-item">
+                        <a href="tel:@phone.Number">@String.Format("{0: (###) ###-####}", Convert.ToInt64(@phone.Number))</a> (@phone.Type.Label)
                         @if (phone.Primary == true)
                         { 
                         <i class="glyphicon glyphicon-ok-sign text-success"></i>
                         <span class="sr-only">Primary</span>
                         }
-                    </div>
+                    </li>
                 }
-            </dl>
+                <li class="list-group-item active"><strong>Emergency Contact@(Model.EmergencyContacts.Count > 1 ? "s" : ""):</strong></li>
+                @foreach (var contact in Model.EmergencyContacts.OrderBy(c => c.Order))
+                {
+                    <li class="list-group-item">
+                        @contact.DisplayName (@contact.Relationship) <br />
+                        <a href="tel:@contact.PhoneNumber">
+                            @String.Format("{0: (###) ###-####}", Convert.ToInt64(contact.PhoneNumber))
+                        </a> (@contact.PhoneType.Label)
+                        
+                    </li>
+                }
+            </ul>
         </div>
         <div class="col-md-4 panel-body">
-            <img src="@Url.Action("Index", "Photos", new { id = Model.ID })" width="200" height="225"/>
+            <img src="@Url.Action("Index", "Photos", new { id = Model.ID })" width="275" height="320"/>
         </div>
     </div>
+
+<div class="clearfix"></div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">Professional Information</h3></div>
+    <div class="col-md-4 panel-body">
+        <ul class="list-group">
+            <li class="list-group-item active"><strong>Skill List:</strong></li>
+            @foreach (var skill in Model.Skills)
+            {
+                <li class="list-group-item">
+                    <img src="@Url.Content("~/content" + @skill.ImageLink)"  
+                         height="23" width="25" alt="icon for @skill.Name" />
+                    @Html.ActionLink(@skill.Name, "Details", "Skills", new { id = @skill.ID }, null)
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-4 panel-body">
+        <ul class="list-group">
+            <li class="list-group-item active"><strong>Position@(Model.Positions.Count > 1 ? "s" : ""):</strong></li>
+            @foreach (var position in Model.Positions.Where(p => p.EndDate == null).OrderBy(p => p.StartDate))
+            {
+                <li class="list-group-item">
+                    @(position.Code): @Html.DisplayFor(p => @position.StartDate) - @Html.DisplayFor(p => @position.EndDate)
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-4 panel-body">
+       
+    </div>
+</div>
+
+
+
 <div class="clearfix"></div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

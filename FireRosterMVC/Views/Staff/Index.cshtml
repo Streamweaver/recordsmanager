@@ -30,21 +30,21 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => dummy.DisplayName)
-                <a href="@Url.Action("Index", "Employees", new { sortField="name" })">
+                <a href="@Url.Action("Index", "Staff", new { sortField="name" })">
                     <i class="glyphicon glyphicon-collapse-down"></i>
                     <span class="sr-only">Sort by</span>
                 </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => dummy.CareerDevelopmentLevel)
-                <a href="@Url.Action("Index", "Employees", new { sortField="cdl" })">
+                <a href="@Url.Action("Index", "Staff", new { sortField="cdl" })">
                     <i class="glyphicon glyphicon-collapse-down"></i>
                     <span class="sr-only">Sort by</span>
                 </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => dummy.HenricoUserID)
-                <a href="@Url.Action("Index", "Employees", new { sortField="userid" })">
+                <a href="@Url.Action("Index", "Staff", new { sortField="userid" })">
                     <i class="glyphicon glyphicon-collapse-down"></i>
                     <span class="sr-only">Sort by</span>
                 </a>

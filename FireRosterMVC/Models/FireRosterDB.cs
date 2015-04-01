@@ -16,5 +16,8 @@ namespace FireRosterMVC.Models
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Race> Race { get; set; }
         public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<Location> Locations { get; set; }
+
+        public System.Data.Entity.DbSet<FireRosterMVC.Models.Skill> Skills { get; set; }
     }
 }

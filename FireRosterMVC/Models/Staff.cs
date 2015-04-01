@@ -15,9 +15,9 @@ using System.Linq;
         [Key, Display(Name = "FireRoster ID")]
         public int ID { get; set; }
 
-        public DateTime? DateCreated { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
-        public DateTime? LastUpdateDate { get; set; }
+        public DateTime? UpdatedOn { get; set; }
 
         public bool Deleted { get; set; }
 
@@ -68,7 +68,7 @@ using System.Linq;
         public DateTime? TerminationDate { get; set; }
 
         [Display(Name = "Military Leave")]
-        public bool isMilitaryLeave { get; set; }
+        public bool MilitaryLeave { get; set; }
 
         [StringLength(50), Display(Name = "Roster Rank")]
         public string RosterRank { get; set; }
@@ -93,6 +93,14 @@ using System.Linq;
         public virtual ICollection<Address> Addresses { get; set; }
 
         public virtual ICollection<Phone> PhoneNumbers { get; set; }
+
+        public virtual ICollection<EmergencyContact> EmergencyContacts { get; set; }
+
+        public virtual ICollection<Skill> Skills { get; set; }
+
+        public virtual Rank Rank { get; set; }
+
+        public virtual ICollection<Position> Positions { get; set; }
 
         // Derived Fields
         [Display(Name = "Full Name")]

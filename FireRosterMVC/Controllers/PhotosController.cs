@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Drawing;
+using System.IO;
 using FireRosterMVC.Models;
 
 namespace FireRosterMVC.Controllers
@@ -16,6 +17,8 @@ namespace FireRosterMVC.Controllers
         public FileContentResult Index(int id)
         {
             Staff staff = db.StaffList.Find(id);
+            
+
             return new FileContentResult(staff.Photo, "image/jpeg");
         }
     }

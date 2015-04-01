@@ -142,6 +142,7 @@
     <Compile Include="Controllers\GenderController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\LocationGroupController.cs" />
+    <Compile Include="Controllers\PhoneController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
@@ -246,11 +247,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Staff\Details.cshtml" />
-    <Content Include="Views\Roster\Create.cshtml" />
-    <Content Include="Views\Roster\Delete.cshtml" />
-    <Content Include="Views\Roster\Details.cshtml" />
-    <Content Include="Views\Roster\Edit.cshtml" />
-    <Content Include="Views\Roster\Index.cshtml" />
     <Content Include="Views\Location\Create.cshtml" />
     <Content Include="Views\Location\Delete.cshtml" />
     <Content Include="Views\Location\Details.cshtml" />
@@ -276,6 +272,11 @@
     <Content Include="Views\LocationGroup\Details.cshtml" />
     <Content Include="Views\LocationGroup\Edit.cshtml" />
     <Content Include="Views\LocationGroup\Index.cshtml" />
+    <Content Include="Views\Phone\Create.cshtml" />
+    <Content Include="Views\Phone\Delete.cshtml" />
+    <Content Include="Views\Phone\Details.cshtml" />
+    <Content Include="Views\Phone\Edit.cshtml" />
+    <Content Include="Views\Phone\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

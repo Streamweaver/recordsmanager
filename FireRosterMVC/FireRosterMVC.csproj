@@ -146,6 +146,7 @@
     <Compile Include="Controllers\PhoneTypeController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\PositionStatusController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -289,6 +290,11 @@
     <Content Include="Views\Position\Details.cshtml" />
     <Content Include="Views\Position\Edit.cshtml" />
     <Content Include="Views\Position\Index.cshtml" />
+    <Content Include="Views\PositionStatus\Create.cshtml" />
+    <Content Include="Views\PositionStatus\Delete.cshtml" />
+    <Content Include="Views\PositionStatus\Details.cshtml" />
+    <Content Include="Views\PositionStatus\Edit.cshtml" />
+    <Content Include="Views\PositionStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

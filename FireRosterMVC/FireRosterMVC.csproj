@@ -147,6 +147,7 @@
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\PositionStatusController.cs" />
+    <Compile Include="Controllers\RaceController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -295,6 +296,11 @@
     <Content Include="Views\PositionStatus\Details.cshtml" />
     <Content Include="Views\PositionStatus\Edit.cshtml" />
     <Content Include="Views\PositionStatus\Index.cshtml" />
+    <Content Include="Views\Race\Create.cshtml" />
+    <Content Include="Views\Race\Delete.cshtml" />
+    <Content Include="Views\Race\Details.cshtml" />
+    <Content Include="Views\Race\Edit.cshtml" />
+    <Content Include="Views\Race\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmergencyContactsController.cs" />
+    <Compile Include="Controllers\GenderController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
@@ -264,6 +265,11 @@
     <Content Include="Views\EmergencyContacts\Details.cshtml" />
     <Content Include="Views\EmergencyContacts\Edit.cshtml" />
     <Content Include="Views\EmergencyContacts\Index.cshtml" />
+    <Content Include="Views\Gender\Create.cshtml" />
+    <Content Include="Views\Gender\Delete.cshtml" />
+    <Content Include="Views\Gender\Details.cshtml" />
+    <Content Include="Views\Gender\Edit.cshtml" />
+    <Content Include="Views\Gender\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

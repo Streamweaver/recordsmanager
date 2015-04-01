@@ -36,11 +36,11 @@
             @Html.DisplayFor(modelItem => item.Abbreviation)
         </td>
         <td>
-            <a href="@Url.Action("Edit", "Edit", new { id=item.ID })">
+            <a href="@Url.Action("Edit", "Skill", new { id=item.ID })">
                 <i class="glyphicon glyphicon-edit"></i>
                 <span class="sr-only">Edit</span>
             </a>
-            <a href="@Url.Action("Delete", "Delete", new { id=item.ID })">
+            <a href="@Url.Action("Delete", "Skill", new { id=item.ID })">
                 <i class="glyphicon glyphicon-trash"></i>
                 <span class="sr-only">Delete</span>
             </a>

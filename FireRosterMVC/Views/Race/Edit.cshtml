@@ -1,10 +1,10 @@
 ﻿@model FireRosterMVC.Models.Race
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit - " + Model.Label + " - Race";
 }
 
-<h2>Edit</h2>
+<h2>Edit: @Html.DisplayFor(model => model.Label)</h2>
 
 
 @using (Html.BeginForm())

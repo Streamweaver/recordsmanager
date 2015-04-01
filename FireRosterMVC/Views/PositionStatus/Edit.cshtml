@@ -1,10 +1,10 @@
 ﻿@model FireRosterMVC.Models.PositionStatus
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit" + Model.Label + " - Position Status";
 }
 
-<h2>Edit</h2>
+<h2>Edit: @Html.DisplayFor(model => model.Label)</h2>
 
 
 @using (Html.BeginForm())

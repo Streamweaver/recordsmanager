@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Position Status List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -20,12 +20,17 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Label)
+           @Html.ActionLink(item.Label, "Details", new { id = item.ID })
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            <a href="@Url.Action("Edit", "PositionStatus", new { id=item.ID })">
+                <i class="glyphicon glyphicon-edit"></i>
+                <span class="sr-only">Edit</span>
+            </a>
+            <a href="@Url.Action("Delete", "PositionStatus", new { id = item.ID })">
+                <i class="glyphicon glyphicon-trash"></i>
+                <span class="sr-only">Delete</span>
+            </a>
         </td>
     </tr>
 }

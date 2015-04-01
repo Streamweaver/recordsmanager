@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<FireRosterMVC.Models.Race>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Race List";
 }
 
-<h2>Index</h2>
+<h2>Race List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -20,12 +20,17 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Label)
+            @Html.ActionLink(item.Label, "Details", new { id = item.ID })
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            <a href="@Url.Action("Edit", "Race", new { id=item.ID })">
+                <i class="glyphicon glyphicon-edit"></i>
+                <span class="sr-only">Edit</span>
+            </a>
+            <a href="@Url.Action("Delete", "Race", new { id=item.ID })">
+                <i class="glyphicon glyphicon-trash"></i>
+                <span class="sr-only">Delete</span>
+            </a>
         </td>
     </tr>
 }

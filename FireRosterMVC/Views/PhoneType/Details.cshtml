@@ -1,14 +1,12 @@
 ﻿@model FireRosterMVC.Models.PhoneType
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Label + " - Phone Type";
 }
 
-<h2>Details</h2>
+<h2>Phone Type: @Html.DisplayFor(model => model.Label)</h2>
 
 <div>
-    <h4>PhoneType</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Label)

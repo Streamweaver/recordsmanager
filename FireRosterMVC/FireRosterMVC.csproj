@@ -148,7 +148,7 @@
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\PositionStatusController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
-    <Compile Include="Controllers\SkillsController.cs" />
+    <Compile Include="Controllers\SkillController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Enums\Activestatus.cs" />
@@ -256,11 +256,11 @@
     <Content Include="Views\Location\Details.cshtml" />
     <Content Include="Views\Location\Edit.cshtml" />
     <Content Include="Views\Location\Index.cshtml" />
-    <Content Include="Views\Skills\Create.cshtml" />
-    <Content Include="Views\Skills\Delete.cshtml" />
-    <Content Include="Views\Skills\Details.cshtml" />
-    <Content Include="Views\Skills\Edit.cshtml" />
-    <Content Include="Views\Skills\Index.cshtml" />
+    <Content Include="Views\Skill\Create.cshtml" />
+    <Content Include="Views\Skill\Delete.cshtml" />
+    <Content Include="Views\Skill\Details.cshtml" />
+    <Content Include="Views\Skill\Edit.cshtml" />
+    <Content Include="Views\Skill\Index.cshtml" />
     <Content Include="Views\EmergencyContacts\Create.cshtml" />
     <Content Include="Views\EmergencyContacts\Delete.cshtml" />
     <Content Include="Views\EmergencyContacts\Details.cshtml" />

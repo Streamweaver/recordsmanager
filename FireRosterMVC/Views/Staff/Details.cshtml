@@ -179,7 +179,7 @@
                 <li class="list-group-item">
                     <img src="@Url.Content("~/content" + @skill.ImageLink)"  
                          height="23" width="25" alt="icon for @skill.Name" />
-                    @Html.ActionLink(@skill.Name, "Details", "Skills", new { id = @skill.ID }, null)
+                    @Html.ActionLink(@skill.Name, "Details", "Skill", new { id = @skill.ID }, null)
                 </li>
             }
         </ul>

@@ -145,6 +145,7 @@
     <Compile Include="Controllers\PhoneController.cs" />
     <Compile Include="Controllers\PhoneTypeController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -283,6 +284,11 @@
     <Content Include="Views\PhoneType\Details.cshtml" />
     <Content Include="Views\PhoneType\Edit.cshtml" />
     <Content Include="Views\PhoneType\Index.cshtml" />
+    <Content Include="Views\Position\Create.cshtml" />
+    <Content Include="Views\Position\Delete.cshtml" />
+    <Content Include="Views\Position\Details.cshtml" />
+    <Content Include="Views\Position\Edit.cshtml" />
+    <Content Include="Views\Position\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

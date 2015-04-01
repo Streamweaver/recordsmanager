@@ -27,5 +27,7 @@ namespace FireRosterMVC.Models
         public System.Data.Entity.DbSet<FireRosterMVC.Models.Phone> Phones { get; set; }
 
         public System.Data.Entity.DbSet<FireRosterMVC.Models.PhoneType> PhoneTypes { get; set; }
+
+        public System.Data.Entity.DbSet<FireRosterMVC.Models.Position> Positions { get; set; }
     }
 }

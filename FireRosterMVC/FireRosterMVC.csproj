@@ -141,6 +141,7 @@
     <Compile Include="Controllers\EmergencyContactsController.cs" />
     <Compile Include="Controllers\GenderController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\LocationGroupController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
@@ -270,6 +271,11 @@
     <Content Include="Views\Gender\Details.cshtml" />
     <Content Include="Views\Gender\Edit.cshtml" />
     <Content Include="Views\Gender\Index.cshtml" />
+    <Content Include="Views\LocationGroup\Create.cshtml" />
+    <Content Include="Views\LocationGroup\Delete.cshtml" />
+    <Content Include="Views\LocationGroup\Details.cshtml" />
+    <Content Include="Views\LocationGroup\Edit.cshtml" />
+    <Content Include="Views\LocationGroup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

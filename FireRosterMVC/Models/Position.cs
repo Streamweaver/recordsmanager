@@ -36,5 +36,6 @@ namespace FireRosterMVC.Models
                 return "G.0501.0" + Code + ".001";
             }
         }
+
     }
 }

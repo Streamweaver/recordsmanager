@@ -19,5 +19,7 @@ namespace FireRosterMVC.Models
         public virtual DbSet<Location> Locations { get; set; }
 
         public System.Data.Entity.DbSet<FireRosterMVC.Models.Skill> Skills { get; set; }
+
+        public System.Data.Entity.DbSet<FireRosterMVC.Models.EmergencyContact> EmergencyContacts { get; set; }
     }
 }

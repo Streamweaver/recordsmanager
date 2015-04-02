@@ -138,6 +138,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CareerDevelopmentLevelController.cs" />
     <Compile Include="Controllers\EmergencyContactsController.cs" />
     <Compile Include="Controllers\GenderController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
@@ -195,20 +196,25 @@
     <Compile Include="Migrations\201503311803040_ModifyPositionNullFields.Designer.cs">
       <DependentUpon>201503311803040_ModifyPositionNullFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504021509232_CreateCreateDevelopmentLevel.cs" />
+    <Compile Include="Migrations\201504021509232_CreateCreateDevelopmentLevel.Designer.cs">
+      <DependentUpon>201504021509232_CreateCreateDevelopmentLevel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Codes\CareerDevelopmentLevel.cs" />
     <Compile Include="Models\EmergencyContact.cs" />
     <Compile Include="Models\FireRosterDB.cs" />
-    <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\Codes\Gender.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\LocationGroup.cs" />
+    <Compile Include="Models\Codes\LocationGroup.cs" />
     <Compile Include="Models\Phone.cs" />
-    <Compile Include="Models\PhoneType.cs" />
+    <Compile Include="Models\Codes\PhoneType.cs" />
     <Compile Include="Models\Position.cs" />
-    <Compile Include="Models\PositionStatus.cs" />
-    <Compile Include="Models\Race.cs" />
-    <Compile Include="Models\Rank.cs" />
-    <Compile Include="Models\Skill.cs" />
+    <Compile Include="Models\Codes\PositionStatus.cs" />
+    <Compile Include="Models\Codes\Race.cs" />
+    <Compile Include="Models\Codes\Rank.cs" />
+    <Compile Include="Models\Codes\Skill.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -301,6 +307,11 @@
     <Content Include="Views\Race\Details.cshtml" />
     <Content Include="Views\Race\Edit.cshtml" />
     <Content Include="Views\Race\Index.cshtml" />
+    <Content Include="Views\CareerDevelopmentLevel\Create.cshtml" />
+    <Content Include="Views\CareerDevelopmentLevel\Delete.cshtml" />
+    <Content Include="Views\CareerDevelopmentLevel\Details.cshtml" />
+    <Content Include="Views\CareerDevelopmentLevel\Edit.cshtml" />
+    <Content Include="Views\CareerDevelopmentLevel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -347,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503311803040_ModifyPositionNullFields.resx">
       <DependentUpon>201503311803040_ModifyPositionNullFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504021509232_CreateCreateDevelopmentLevel.resx">
+      <DependentUpon>201504021509232_CreateCreateDevelopmentLevel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -3,7 +3,7 @@ namespace FireRosterMVC.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateCreateDevelopmentLevel : DbMigration
+    public partial class CreateCareerDevelopmentLevel : DbMigration
     {
         public override void Up()
         {

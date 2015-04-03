@@ -196,9 +196,9 @@
     <Compile Include="Migrations\201503311803040_ModifyPositionNullFields.Designer.cs">
       <DependentUpon>201503311803040_ModifyPositionNullFields.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201504021509232_CreateCreateDevelopmentLevel.cs" />
-    <Compile Include="Migrations\201504021509232_CreateCreateDevelopmentLevel.Designer.cs">
-      <DependentUpon>201504021509232_CreateCreateDevelopmentLevel.cs</DependentUpon>
+    <Compile Include="Migrations\201504031233292_CreateCareerDevelopmentLevel.cs" />
+    <Compile Include="Migrations\201504031233292_CreateCareerDevelopmentLevel.Designer.cs">
+      <DependentUpon>201504031233292_CreateCareerDevelopmentLevel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -359,8 +359,8 @@
     <EmbeddedResource Include="Migrations\201503311803040_ModifyPositionNullFields.resx">
       <DependentUpon>201503311803040_ModifyPositionNullFields.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504021509232_CreateCreateDevelopmentLevel.resx">
-      <DependentUpon>201504021509232_CreateCreateDevelopmentLevel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504031233292_CreateCareerDevelopmentLevel.resx">
+      <DependentUpon>201504031233292_CreateCareerDevelopmentLevel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

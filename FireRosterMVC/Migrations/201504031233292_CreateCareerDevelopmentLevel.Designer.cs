@@ -7,13 +7,13 @@ namespace FireRosterMVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class CreateCreateDevelopmentLevel : IMigrationMetadata
+    public sealed partial class CreateCareerDevelopmentLevel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateCreateDevelopmentLevel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateCareerDevelopmentLevel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201504021509232_CreateCreateDevelopmentLevel"; }
+            get { return "201504031233292_CreateCareerDevelopmentLevel"; }
         }
         
         string IMigrationMetadata.Source

@@ -11,8 +11,7 @@ namespace FireRosterMVC.Models.Codes
         [Key]
         public int ID { get; set; }
 
-        [Required]
-        [StringLength(10)]
+        [StringLength(10), Required]
         public string Label { get; set; }
     }
 }

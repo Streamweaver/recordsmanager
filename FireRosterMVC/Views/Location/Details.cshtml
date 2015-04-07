@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>@Html.DisplayFor(model => model.Name)</h2>
+<h2>Details</h2>
 
 <div>
     <h4>Location</h4>
@@ -24,6 +24,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.MinimumComplement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>

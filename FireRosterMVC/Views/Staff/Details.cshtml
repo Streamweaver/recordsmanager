@@ -187,10 +187,12 @@
     <div class="col-md-4 panel-body">
         <ul class="list-group">
             <li class="list-group-item active"><strong>Position@(Model.Positions.Count > 1 ? "s" : ""):</strong></li>
-            @foreach (var position in Model.Positions.Where(p => p.EndDate == null).OrderBy(p => p.StartDate))
+            @foreach (var position in Model.Positions.Where(p => p.EndDate == null || p.EndDate > DateTime.Now).OrderBy(p => p.StartDate))
             {
                 <li class="list-group-item">
-                    @(position.Code): @Html.DisplayFor(p => @position.StartDate) - @Html.DisplayFor(p => @position.EndDate)
+                    <strong>@Html.ActionLink(position.DisplayName, "Details", "Position", new { id = position.ID }, null):</strong>
+                    <strong>Start:</strong> @Html.DisplayFor(p => position.StartDate)
+                    <strong>End:</strong>@Html.DisplayFor(p => position.EndDate)
                 </li>
             }
         </ul>

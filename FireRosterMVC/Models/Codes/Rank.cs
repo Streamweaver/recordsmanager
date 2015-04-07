@@ -16,8 +16,6 @@ namespace FireRosterMVC.Models
         public string Security { get; set; }
         public int Order { get; set; }
 
-        public virtual ICollection<Staff> StaffList { get; set; }
-
         public Rank()
         {
             Order = 9999;

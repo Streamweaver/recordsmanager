@@ -1,12 +1,13 @@
 namespace FireRosterMVC.Models
 {
     using FireRosterMVC.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Linq;
+    using FireRosterMVC.Models.Codes;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
+    using System.Linq;
 
     [Table("Staff")]
     public class Staff
@@ -86,9 +87,17 @@ using System.Linq;
         public byte[] Photo { get; set; }
 
         // Related Fields
+        public int? Gender_ID { get; set; }
+        [ForeignKey("Gender_ID")]
         public virtual Gender Gender { get; set; }
 
+        public int? Race_ID { get; set; }
+        [ForeignKey("Race_ID")]
         public virtual Race Race { get; set; }
+
+        public int? CDL_ID { get; set; }
+        [ForeignKey("CDL_ID")]
+        public virtual CareerDevelopmentLevel CDL { get; set; }
 
         public virtual ICollection<Address> Addresses { get; set; }
 
@@ -97,8 +106,6 @@ using System.Linq;
         public virtual ICollection<EmergencyContact> EmergencyContacts { get; set; }
 
         public virtual ICollection<Skill> Skills { get; set; }
-
-        public virtual Rank Rank { get; set; }
 
         public virtual ICollection<Position> Positions { get; set; }
 

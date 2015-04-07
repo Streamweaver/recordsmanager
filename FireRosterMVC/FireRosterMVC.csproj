@@ -149,6 +149,7 @@
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\PositionStatusController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
+    <Compile Include="Controllers\RankController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -199,6 +200,22 @@
     <Compile Include="Migrations\201504031233292_CreateCareerDevelopmentLevel.cs" />
     <Compile Include="Migrations\201504031233292_CreateCareerDevelopmentLevel.Designer.cs">
       <DependentUpon>201504031233292_CreateCareerDevelopmentLevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504031242106_ModifyStaffAddCDL.cs" />
+    <Compile Include="Migrations\201504031242106_ModifyStaffAddCDL.Designer.cs">
+      <DependentUpon>201504031242106_ModifyStaffAddCDL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504071728088_AddPositionRelationsToRankAndLocation.cs" />
+    <Compile Include="Migrations\201504071728088_AddPositionRelationsToRankAndLocation.Designer.cs">
+      <DependentUpon>201504071728088_AddPositionRelationsToRankAndLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504071757300_DropStaffRankRelationship.cs" />
+    <Compile Include="Migrations\201504071757300_DropStaffRankRelationship.Designer.cs">
+      <DependentUpon>201504071757300_DropStaffRankRelationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504071857470_DropPositionRankAndLocationRelationship.cs" />
+    <Compile Include="Migrations\201504071857470_DropPositionRankAndLocationRelationship.Designer.cs">
+      <DependentUpon>201504071857470_DropPositionRankAndLocationRelationship.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -257,11 +274,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Staff\Details.cshtml" />
-    <Content Include="Views\Location\Create.cshtml" />
-    <Content Include="Views\Location\Delete.cshtml" />
-    <Content Include="Views\Location\Details.cshtml" />
-    <Content Include="Views\Location\Edit.cshtml" />
-    <Content Include="Views\Location\Index.cshtml" />
     <Content Include="Views\Skill\Create.cshtml" />
     <Content Include="Views\Skill\Delete.cshtml" />
     <Content Include="Views\Skill\Details.cshtml" />
@@ -312,6 +324,17 @@
     <Content Include="Views\CareerDevelopmentLevel\Details.cshtml" />
     <Content Include="Views\CareerDevelopmentLevel\Edit.cshtml" />
     <Content Include="Views\CareerDevelopmentLevel\Index.cshtml" />
+    <Content Include="Views\Location\Create.cshtml" />
+    <Content Include="Views\Location\Delete.cshtml" />
+    <Content Include="Views\Location\Details.cshtml" />
+    <Content Include="Views\Location\Edit.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Staff\Edit.cshtml" />
+    <Content Include="Views\Rank\Create.cshtml" />
+    <Content Include="Views\Rank\Delete.cshtml" />
+    <Content Include="Views\Rank\Details.cshtml" />
+    <Content Include="Views\Rank\Edit.cshtml" />
+    <Content Include="Views\Rank\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -361,6 +384,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504031233292_CreateCareerDevelopmentLevel.resx">
       <DependentUpon>201504031233292_CreateCareerDevelopmentLevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504031242106_ModifyStaffAddCDL.resx">
+      <DependentUpon>201504031242106_ModifyStaffAddCDL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504071728088_AddPositionRelationsToRankAndLocation.resx">
+      <DependentUpon>201504071728088_AddPositionRelationsToRankAndLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504071757300_DropStaffRankRelationship.resx">
+      <DependentUpon>201504071757300_DropStaffRankRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504071857470_DropPositionRankAndLocationRelationship.resx">
+      <DependentUpon>201504071857470_DropPositionRankAndLocationRelationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

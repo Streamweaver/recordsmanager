@@ -11,6 +11,7 @@ using FireRosterMVC.Models;
 using PagedList;
 using System.Linq.Expressions;
 using FireRosterMVC.Enums;
+using System.Data.Entity.Infrastructure;
 
 namespace FireRosterMVC.Controllers
 {
@@ -142,6 +143,7 @@ namespace FireRosterMVC.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateGenderDropDownList(Staff.Gender_ID);
             return View(Staff);
         }
 
@@ -195,5 +197,30 @@ namespace FireRosterMVC.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private void PopulateGenderDropDownList(object selectedGender = null)
+        {
+            var genderQuery = from g in db.Gender
+                              orderby g.Label
+                              select g;
+            ViewBag.Gender_ID = new SelectList(genderQuery, "ID", "Label", selectedGender);
+        }
+
+        private void PopulateRaceDropDownList(object selectedRace = null)
+        {
+            var raceQuery = from r in db.Race
+                            orderby r.Label
+                            select r;
+            ViewBag.Race_ID = new SelectList(raceQuery, "ID", "Label", selectedRace);
+        }
+
+        private void PopulateCDLDropDownList(object selectedCDL = null)
+        {
+            var cdlQuery = from c in db.CareerDevelopmentLevels
+                           orderby c.Label
+                           select c;
+            ViewBag.CDL_ID = new SelectList(cdlQuery, "ID", "Label", selectedCDL);
+        }
+
     }
 }

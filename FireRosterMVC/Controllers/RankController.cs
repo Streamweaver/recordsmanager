@@ -11,107 +11,107 @@ using FireRosterMVC.Models;
 
 namespace FireRosterMVC.Controllers
 {
-    public class LocationController : Controller
+    public class RankController : Controller
     {
         private FireRosterDB db = new FireRosterDB();
 
-        // GET: Location
+        // GET: Rank
         public async Task<ActionResult> Index()
         {
-            return View(await db.Locations.ToListAsync());
+            return View(await db.Ranks.ToListAsync());
         }
 
-        // GET: Location/Details/5
+        // GET: Rank/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Location location = await db.Locations.FindAsync(id);
-            if (location == null)
+            Rank rank = await db.Ranks.FindAsync(id);
+            if (rank == null)
             {
                 return HttpNotFound();
             }
-            return View(location);
+            return View(rank);
         }
 
-        // GET: Location/Create
+        // GET: Rank/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Location/Create
+        // POST: Rank/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Code,MinimumComplement,Name,Phone,Street1,Street2,City,State,Zip,Order")] Location location)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Code,Security,Order")] Rank rank)
         {
             if (ModelState.IsValid)
             {
-                db.Locations.Add(location);
+                db.Ranks.Add(rank);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(location);
+            return View(rank);
         }
 
-        // GET: Location/Edit/5
+        // GET: Rank/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Location location = await db.Locations.FindAsync(id);
-            if (location == null)
+            Rank rank = await db.Ranks.FindAsync(id);
+            if (rank == null)
             {
                 return HttpNotFound();
             }
-            return View(location);
+            return View(rank);
         }
 
-        // POST: Location/Edit/5
+        // POST: Rank/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Code,MinimumComplement,Name,Phone,Street1,Street2,City,State,Zip,Order")] Location location)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Code,Security,Order")] Rank rank)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(location).State = EntityState.Modified;
+                db.Entry(rank).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(location);
+            return View(rank);
         }
 
-        // GET: Location/Delete/5
+        // GET: Rank/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Location location = await db.Locations.FindAsync(id);
-            if (location == null)
+            Rank rank = await db.Ranks.FindAsync(id);
+            if (rank == null)
             {
                 return HttpNotFound();
             }
-            return View(location);
+            return View(rank);
         }
 
-        // POST: Location/Delete/5
+        // POST: Rank/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Location location = await db.Locations.FindAsync(id);
-            db.Locations.Remove(location);
+            Rank rank = await db.Ranks.FindAsync(id);
+            db.Ranks.Remove(rank);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

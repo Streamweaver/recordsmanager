@@ -29,13 +29,38 @@ namespace FireRosterMVC.Models
 
         public virtual PositionStatus Status { get; set; }
 
+        public virtual Staff Staff { get; set; }
+
+        [Display(Name="HR Code")]
         public string HRCode  // Format of the position coded used at HR
         {
             get
             {
-                return "G.0501.0" + Code + ".001";
+                if (Code == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return "G.0501.0" + Code + ".001";
+                }
+                
             }
         }
 
+        public string DisplayName
+        {
+            get
+            {
+                if (Code == null)
+                {
+                    return "Position ID " + ID;
+                }
+                else
+                {
+                    return Code;
+                }
+            }
+        }
     }
 }

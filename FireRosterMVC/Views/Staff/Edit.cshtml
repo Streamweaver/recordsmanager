@@ -61,7 +61,15 @@
             <label class="control-label col-md-2" for="Gender_ID">Gender</label>
             <div class="col-md-10">
                 @Html.DropDownList("Gender_ID", String.Empty)
-                @Html.ValidationMessageFor(model => model.ID)
+                @Html.ValidationMessageFor(model => model.Gender_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Race_ID">Race</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Race_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.Race_ID)
             </div>
         </div>
 
@@ -73,8 +81,6 @@
             </div>
         </div>
 
-        
-
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -84,18 +90,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RankDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="CDL_ID">CD Level</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RankDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RankDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CareerDevelopmentLevel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CareerDevelopmentLevel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CareerDevelopmentLevel, "", new { @class = "text-danger" })
+                @Html.DropDownList("CDL_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.CDL_ID)
             </div>
         </div>
 
@@ -104,6 +102,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CareerDevelopmentDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CareerDevelopmentDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RankDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RankDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RankDate, "", new { @class = "text-danger" })
             </div>
         </div>
 

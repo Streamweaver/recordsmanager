@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<FireRosterMVC.Models.Rank>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rank List";
 }
 
-<h2>Index</h2>
+<h2>Rank List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -17,27 +17,26 @@
         <th>
             @Html.DisplayNameFor(model => model.Security)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Order)
-        </th>
-        <th></th>
+        <th>Action</th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Code)
+            @Html.ActionLink(item.Code, "Details", new { id = item.ID })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Security)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Order)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            <a href="@Url.Action("Edit", "Rank", new { id=item.ID })">
+                <i class="glyphicon glyphicon-edit"></i>
+                <span class="sr-only">Edit</span>
+            </a>
+            <a href="@Url.Action("Delete", "Rank", new { id=item.ID })">
+                <i class="glyphicon glyphicon-trash"></i>
+                <span class="sr-only">Delete</span>
+            </a>
         </td>
     </tr>
 }

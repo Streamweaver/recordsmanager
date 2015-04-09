@@ -1,7 +1,7 @@
 ﻿@model FireRosterMVC.Models.Staff
 
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Address Detail";
 }
 
 <h2>@Html.DisplayFor(model => model.DisplayName)</h2>
@@ -54,10 +54,10 @@
                     @Html.DisplayFor(model => model.RankDate)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.CareerDevelopmentLevel)
+                    @Html.DisplayNameFor(model => model.CDL)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.CareerDevelopmentLevel)
+                    @Html.DisplayFor(model => model.CDL.Label)
                 </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.CareerDevelopmentDate)
@@ -115,33 +115,36 @@
                 @foreach (var addr in Model.Addresses)
                 {
                 <li class="list-group-item">
-                        @if (!string.IsNullOrEmpty(addr.Street1))
+                    <a href="@Url.Action("Details", "Address", new { id = addr.ID })">
+                        @if (!string.IsNullOrWhiteSpace(addr.Street1))
                         {
-                            @addr.Street1 <br />
+                            @(addr.Street1)<br />
                         }
-                        @if (!string.IsNullOrEmpty(addr.Street2))
+                        @if (!string.IsNullOrWhiteSpace(addr.Street2))
                         {
-                            @addr.Street2 <br />
+                            @(addr.Street2)<br />
                         }
-                        @if (!string.IsNullOrEmpty(addr.City))
+                        @if (!string.IsNullOrWhiteSpace(addr.City))
                         {
-                            @addr.City
-                        },
-                        @if (!string.IsNullOrEmpty(addr.State))
+                            @(addr.City)@:,
+                       }
+                        @if (!string.IsNullOrWhiteSpace(addr.State))
                         {
-                            @addr.State
+                            @(addr.State)
                         }
-                        @if (!string.IsNullOrEmpty(addr.Zip))
+                        @if (!string.IsNullOrWhiteSpace(addr.Zip))
                         {
-                            @addr.Zip
+                            @(addr.Zip)
                         }
+                    </a>
                 </li>
                 }
                 <li class="list-group-item active"><strong>Phone Number@(Model.PhoneNumbers.Count > 1 ? "s" : ""):</strong></li>
                 @foreach (var phone in Model.PhoneNumbers)
                 {
                     <li class="list-group-item">
-                        <a href="tel:@phone.Number">@String.Format("{0: (###) ###-####}", Convert.ToInt64(@phone.Number))</a> (@phone.Type.Label)
+                        @Html.ActionLink(@phone.DisplayNumber, "Details", "Phone", new { id = @phone.ID }, null)
+                        (@phone.Type.Label)
                         @if (phone.Primary == true)
                         { 
                         <i class="glyphicon glyphicon-ok-sign text-success"></i>
@@ -153,17 +156,16 @@
                 @foreach (var contact in Model.EmergencyContacts.OrderBy(c => c.Order))
                 {
                     <li class="list-group-item">
-                        @contact.DisplayName (@contact.Relationship) <br />
-                        <a href="tel:@contact.PhoneNumber">
-                            @String.Format("{0: (###) ###-####}", Convert.ToInt64(contact.PhoneNumber))
-                        </a> (@contact.PhoneType.Label)
+                        @Html.ActionLink(contact.DisplayName, "Details", "EmergencyContact", new { id = contact.ID }, null)
+                       (@contact.Relationship) <br />
+                        @contact.DisplayNumber (@contact.PhoneType.Label)
                         
                     </li>
                 }
             </ul>
         </div>
-        <div class="col-md-4 panel-body">
-            <img src="@Url.Action("Index", "Photos", new { id = Model.ID })" width="275" height="320"/>
+        <div class="col-md-4 panel-body text-center">
+            <img src="@Url.Action("Index", "Photo", new { id = Model.ID })" height="325" width="274" />
         </div>
     </div>
 

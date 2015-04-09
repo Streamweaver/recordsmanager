@@ -1,0 +1,46 @@
+﻿@model IEnumerable<FireRosterMVC.Models.Address>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Address List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Address
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="@Url.Action("Details", "Address", new { id=item.ID })">
+                @(item.Street1)  @(item.Street2)
+                @if (!string.IsNullOrWhiteSpace(item.City))
+                {
+                    @(item.City)@:,
+                }
+                @(item.State)
+                @(item.Zip)
+            </a>
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", "Address", new { id=item.ID })">
+                <i class="glyphicon glyphicon-edit"></i>
+                <span class="sr-only">Edit</span>
+            </a>
+            <a href="@Url.Action("Delete", "Address", new { id=item.ID })">
+                <i class="glyphicon glyphicon-trash"></i>
+                <span class="sr-only">Delete</span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

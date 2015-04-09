@@ -71,6 +71,7 @@ namespace FireRosterMVC.Controllers
             {
                 return HttpNotFound();
             }
+            GroupDropDownList(location.Group_ID);
             return View(location);
         }
 
@@ -123,6 +124,14 @@ namespace FireRosterMVC.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void GroupDropDownList(object selectedGroup = null)
+        {
+            var groupQuery = from g in db.LocationGroups
+                           orderby g.Label
+                           select g;
+            ViewBag.Group_ID = new SelectList(groupQuery, "ID", "Label", selectedGroup);
         }
     }
 }

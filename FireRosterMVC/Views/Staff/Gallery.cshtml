@@ -1,0 +1,39 @@
+﻿@model PagedList.IPagedList<FireRosterMVC.Models.Staff>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Gallery";
+}
+
+
+
+<h2>Fire Division Staff Gallery</h2>
+
+
+@foreach (var item in Model)
+{
+    <div class="col-sm-3 col-xs-6 panel">
+        <div class="thumbnail text-center">
+            <a href="@Url.Action("Details", "Staff", new { id = item.ID })">
+                <img src="@Url.Action("Index", "Photo", new { id = item.ID, height = 220, width = 220 })" alt="Picture of @Html.DisplayFor(modelItem => item.DisplayName)" />
+            </a>
+            <div class="caption text-center">
+                <a href="@Url.Action("Details", "Staff", new { id = item.ID })">@Html.DisplayFor(modelItem => item.DisplayName)</a>
+            </div>
+        </div>
+    </div>  
+}
+<div class="clearfix"></div>
+<div class="panel-footer">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Gallery",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSortOrder,
+        sortField = ViewBag.CurrentSortField,
+        searchString = ViewBag.CurrentFilter,
+        statusFilter = ViewBag.CurrentStatusFilter
+    }))
+</div>
+

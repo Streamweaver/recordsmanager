@@ -62,6 +62,7 @@ namespace FireRosterMVC.Controllers
         // GET: Phone/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -71,6 +72,7 @@ namespace FireRosterMVC.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateTypeDropDownList(phone.Type_ID);
             return View(phone);
         }
 
@@ -123,6 +125,14 @@ namespace FireRosterMVC.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void PopulateTypeDropDownList(object selectedType = null)
+        {
+            var typeQuery = from t in db.PhoneTypes
+                              orderby t.Label
+                              select t;
+            ViewBag.Type_ID = new SelectList(typeQuery, "ID", "Label", selectedType);
         }
     }
 }

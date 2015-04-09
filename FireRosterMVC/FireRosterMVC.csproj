@@ -45,6 +45,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ImageProcessor">
+      <HintPath>..\packages\ImageProcessor.2.2.0.0\lib\net45\ImageProcessor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -138,14 +141,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\CareerDevelopmentLevelController.cs" />
-    <Compile Include="Controllers\EmergencyContactsController.cs" />
+    <Compile Include="Controllers\EmergencyContactController.cs" />
     <Compile Include="Controllers\GenderController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\LocationGroupController.cs" />
     <Compile Include="Controllers\PhoneController.cs" />
     <Compile Include="Controllers\PhoneTypeController.cs" />
-    <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\PositionStatusController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
@@ -217,6 +221,10 @@
     <Compile Include="Migrations\201504071857470_DropPositionRankAndLocationRelationship.Designer.cs">
       <DependentUpon>201504071857470_DropPositionRankAndLocationRelationship.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504091248487_DropStaffCareerDevelopmentLevel.cs" />
+    <Compile Include="Migrations\201504091248487_DropStaffCareerDevelopmentLevel.Designer.cs">
+      <DependentUpon>201504091248487_DropStaffCareerDevelopmentLevel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Codes\CareerDevelopmentLevel.cs" />
@@ -279,11 +287,11 @@
     <Content Include="Views\Skill\Details.cshtml" />
     <Content Include="Views\Skill\Edit.cshtml" />
     <Content Include="Views\Skill\Index.cshtml" />
-    <Content Include="Views\EmergencyContacts\Create.cshtml" />
-    <Content Include="Views\EmergencyContacts\Delete.cshtml" />
-    <Content Include="Views\EmergencyContacts\Details.cshtml" />
-    <Content Include="Views\EmergencyContacts\Edit.cshtml" />
-    <Content Include="Views\EmergencyContacts\Index.cshtml" />
+    <Content Include="Views\EmergencyContact\Create.cshtml" />
+    <Content Include="Views\EmergencyContact\Delete.cshtml" />
+    <Content Include="Views\EmergencyContact\Details.cshtml" />
+    <Content Include="Views\EmergencyContact\Edit.cshtml" />
+    <Content Include="Views\EmergencyContact\Index.cshtml" />
     <Content Include="Views\Gender\Create.cshtml" />
     <Content Include="Views\Gender\Delete.cshtml" />
     <Content Include="Views\Gender\Details.cshtml" />
@@ -335,10 +343,16 @@
     <Content Include="Views\Rank\Details.cshtml" />
     <Content Include="Views\Rank\Edit.cshtml" />
     <Content Include="Views\Rank\Index.cshtml" />
+    <Content Include="Views\Address\Create.cshtml" />
+    <Content Include="Views\Address\Delete.cshtml" />
+    <Content Include="Views\Address\Details.cshtml" />
+    <Content Include="Views\Address\Edit.cshtml" />
+    <Content Include="Views\Address\Index.cshtml" />
+    <Content Include="Views\Staff\Gallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\" />
+    <Folder Include="Content\images\thumbs\" />
     <Folder Include="Views\Photos\" />
   </ItemGroup>
   <ItemGroup>
@@ -396,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504071857470_DropPositionRankAndLocationRelationship.resx">
       <DependentUpon>201504071857470_DropPositionRankAndLocationRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504091248487_DropStaffCareerDevelopmentLevel.resx">
+      <DependentUpon>201504091248487_DropStaffCareerDevelopmentLevel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

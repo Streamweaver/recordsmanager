@@ -11,7 +11,7 @@ using FireRosterMVC.Models;
 
 namespace FireRosterMVC.Controllers
 {
-    public class EmergencyContactsController : Controller
+    public class EmergencyContactController : Controller
     {
         private FireRosterDB db = new FireRosterDB();
 

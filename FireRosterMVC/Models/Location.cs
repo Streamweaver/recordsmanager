@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -30,11 +31,33 @@ namespace FireRosterMVC.Models
         public string Zip { get; set; }
         public int Order { get; set; }
 
+        public int? Group_ID { get; set; }
+        [ForeignKey("Group_ID")]
         public virtual LocationGroup Group { get; set; }
 
         public Location()
         {
             Order = 9999;
+        }
+
+        public string DisplayPhone
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Phone))
+                {
+                    return "";
+                }
+                if (Phone.Length == 10)
+                {
+                    return String.Format("{0: (###) ###-####}", Convert.ToInt64(Phone));
+                }
+                if (Phone.Length == 7)
+                {
+                    return String.Format("{0: ###-####}", Convert.ToInt64(Phone));
+                }
+                return Phone;
+            }
         }
     }
 }

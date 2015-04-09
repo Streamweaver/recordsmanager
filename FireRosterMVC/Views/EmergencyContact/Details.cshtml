@@ -4,11 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.DisplayName)</h2>
 
 <div>
-    <h4>EmergencyContact</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -43,11 +41,10 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Order)
+            @Html.DisplayNameFor(model => model.Staff)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Order)
+            @Html.ActionLink(Model.Staff.DisplayName, "Details", "Staff", new { id = Model.Staff.ID }, null)
         </dd>
 
     </dl>

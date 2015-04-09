@@ -36,7 +36,7 @@
                 </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => dummy.CareerDevelopmentLevel)
+                @Html.DisplayNameFor(model => dummy.CDL)
                 <a href="@Url.Action("Index", "Staff", new { sortField="cdl" })">
                     <i class="glyphicon glyphicon-collapse-down"></i>
                     <span class="sr-only">Sort by</span>
@@ -63,7 +63,7 @@
                     @Html.ActionLink(item.DisplayName, "Details", new { id = item.ID })
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CareerDevelopmentLevel)
+                    @Html.DisplayFor(modelItem => item.CDL.Label)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HenricoUserID)
@@ -72,11 +72,11 @@
                     @Html.DisplayFor(modelItem => item.CurrentAssignment)
                 </td>
                 <td>
-                    <a href="@Url.Action("Edit", "Edit", new { id=item.ID })">
+                    <a href="@Url.Action("Edit", "Staff", new { id=item.ID })">
                         <i class="glyphicon glyphicon-edit"></i>
                         <span class="sr-only">Edit</span>
                     </a>
-                    <a href="@Url.Action("Delete", "Delete", new { id=item.ID })">
+                    <a href="@Url.Action("Delete", "Staff", new { id=item.ID })">
                         <i class="glyphicon glyphicon-trash"></i>
                         <span class="sr-only">Delete</span>
                     </a>

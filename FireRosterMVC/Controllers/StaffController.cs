@@ -71,7 +71,7 @@ namespace FireRosterMVC.Controllers
                     OrderByExpression = s => s.LastName;
                     break;
                 case "cdl":
-                    OrderByExpression = s => s.CareerDevelopmentLevel;
+                    OrderByExpression = s => s.CDL.Label;
                     break;
                 case "userid":
                     OrderByExpression = s => s.HenricoUserID;
@@ -90,6 +90,23 @@ namespace FireRosterMVC.Controllers
                 staff = staff.OrderBy(OrderByExpression);
             }
             
+            return View(staff.ToPagedList(pageNumber, pageSize));
+        }
+
+        // GET: Staff/Gallery
+        public ActionResult Gallery(int? page)
+        {
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+
+            var staff = from s in db.StaffList
+                            .Where(s => s.Deleted == false)
+                            .Where(s => s.Photo != null)
+                            .Where(s => s.EmploymentDate != null && s.EmploymentDate <= DateTime.Now)
+                            .Where(s => s.TerminationDate == null || s.TerminationDate > DateTime.Now)
+                            .OrderBy(s => s.LastName)
+                        select s;
+
             return View(staff.ToPagedList(pageNumber, pageSize));
         }
 
@@ -144,6 +161,8 @@ namespace FireRosterMVC.Controllers
                 return HttpNotFound();
             }
             PopulateGenderDropDownList(Staff.Gender_ID);
+            PopulateRaceDropDownList(Staff.Race_ID);
+            PopulateCDLDropDownList(Staff.CDL_ID);
             return View(Staff);
         }
 

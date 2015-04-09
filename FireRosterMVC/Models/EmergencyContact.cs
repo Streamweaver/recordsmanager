@@ -31,10 +31,26 @@ namespace FireRosterMVC.Models
 
         public string DisplayName
         {
-            get {
+            get 
+            {
                 return LastName + ", " + FirstName;
             }
             
+        }
+
+        public string DisplayNumber
+        {
+            get
+            {
+                if (PhoneNumber.Length > 6)
+                {
+                    return String.Format("{0: (###) ###-####}", Convert.ToInt64(PhoneNumber));
+                }
+                else
+                {
+                    return PhoneNumber;
+                }
+            }
         }
     }
 }

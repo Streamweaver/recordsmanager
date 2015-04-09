@@ -24,5 +24,17 @@ namespace FireRosterMVC.Models
         public bool Primary { get; set; }
 
         public virtual Staff Staff { get; set; }
+
+        public string DisplayAddress
+        {
+            get
+            {
+                // Big work around here since none of these fields are required.
+                string beforeComma = String.Join("<br>", new[] { Street1, Street2, City });
+                string afterComma = String.Join(" ", new[] { State, Zip });
+                string result = String.Join(",", new[] { beforeComma, afterComma } );
+                return result;
+            }
+        }
     }
 }

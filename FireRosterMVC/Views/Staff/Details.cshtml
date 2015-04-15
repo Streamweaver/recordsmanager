@@ -96,6 +96,18 @@
                     @Html.DisplayFor(model => model.HenricoUserID)
                 </dd>
                 <dt>
+                    @Html.DisplayNameFor(model => model.DisplayEmail)
+                </dt>
+                <dd>
+                    @if (!Model.DisplayEmail.IsEmpty())
+                    {
+                        <a rel="nofollow" href="mailto:@Html.Raw(Model.DisplayEmail)">
+                        @Html.DisplayFor(model => model.DisplayEmail)
+                        </a>
+                    }
+                    
+                </dd>
+                <dt>
                     @Html.DisplayNameFor(model => model.OracleHrID)
                 </dt>
                 <dd>
@@ -188,13 +200,12 @@
     </div>
     <div class="col-md-4 panel-body">
         <ul class="list-group">
-            <li class="list-group-item active"><strong>Position@(Model.Positions.Count > 1 ? "s" : ""):</strong></li>
-            @foreach (var position in Model.Positions.Where(p => p.EndDate == null || p.EndDate > DateTime.Now).OrderBy(p => p.StartDate))
+            <li class="list-group-item active"><strong>Position@(Model.CurrentPositions.Count() > 1 ? "s" : ""):</strong></li>
+            @foreach (var position in Model.CurrentPositions)
             {
                 <li class="list-group-item">
-                    <strong>@Html.ActionLink(position.DisplayName, "Details", "Position", new { id = position.ID }, null):</strong>
-                    <strong>Start:</strong> @Html.DisplayFor(p => position.StartDate)
-                    <strong>End:</strong>@Html.DisplayFor(p => position.EndDate)
+                    @Html.ActionLink(position.DisplayName, "Details", "Position", new { id = position.ID }, null)<br />
+                    @Html.DisplayFor(p => position.StartDate) - @Html.DisplayFor(p => position.EndDate)
                 </li>
             }
         </ul>

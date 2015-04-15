@@ -74,7 +74,7 @@ namespace FireRosterMVC.Models
         [StringLength(50), Display(Name = "User ID")]
         public string HenricoUserID { get; set; }
 
-        [StringLength(50), Display(Name = "HR ID")]
+        [StringLength(50), Display(Name = "Emplooyee #")]
         public string OracleHrID { get; set; }
 
         [StringLength(50), Display(Name = "Badge Number")]
@@ -106,6 +106,16 @@ namespace FireRosterMVC.Models
 
         public virtual ICollection<Position> Positions { get; set; }
 
+        public IEnumerable<Position> CurrentPositions
+        {
+            get
+            {
+                return Positions
+                        .Where(p => p.EndDate == null || p.EndDate > DateTime.Now)
+                        .OrderByDescending(p => p.StartDate);
+            }
+        }
+
         // Derived Fields
         [Display(Name = "Full Name")]
         public string DisplayName
@@ -119,6 +129,22 @@ namespace FireRosterMVC.Models
                 else
                 {
                     return LastName + ", " + FirstName + " " + MiddleName;
+                }
+            }
+        }
+
+        [Display(Name="Email")]
+        public string DisplayEmail
+        {
+            get
+            {
+                if (HenricoUserID != null)
+                {
+                    return HenricoUserID.ToLower() + "@henrico.us";
+                }
+                else
+                {
+                    return null;
                 }
             }
         }

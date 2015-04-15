@@ -158,6 +158,7 @@
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Enums\Activestatus.cs" />
+    <Compile Include="Enums\Shift.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,6 +225,14 @@
     <Compile Include="Migrations\201504091248487_DropStaffCareerDevelopmentLevel.cs" />
     <Compile Include="Migrations\201504091248487_DropStaffCareerDevelopmentLevel.Designer.cs">
       <DependentUpon>201504091248487_DropStaffCareerDevelopmentLevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504101436524_AddPositionFields.cs" />
+    <Compile Include="Migrations\201504101436524_AddPositionFields.Designer.cs">
+      <DependentUpon>201504101436524_AddPositionFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142015305_DropPositionUselessFields.cs" />
+    <Compile Include="Migrations\201504142015305_DropPositionUselessFields.Designer.cs">
+      <DependentUpon>201504142015305_DropPositionUselessFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -413,6 +422,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504091248487_DropStaffCareerDevelopmentLevel.resx">
       <DependentUpon>201504091248487_DropStaffCareerDevelopmentLevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504101436524_AddPositionFields.resx">
+      <DependentUpon>201504101436524_AddPositionFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142015305_DropPositionUselessFields.resx">
+      <DependentUpon>201504142015305_DropPositionUselessFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

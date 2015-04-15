@@ -17,7 +17,7 @@
             <a href="@Url.Action("Details", "Staff", new { id = item.ID })">
                 <img src="@Url.Action("Index", "Photo", new { id = item.ID, height = 220, width = 220 })" alt="Picture of @Html.DisplayFor(modelItem => item.DisplayName)" />
             </a>
-            <div class="caption text-center">
+            <div class="caption text-center text-nowrap">
                 <a href="@Url.Action("Details", "Staff", new { id = item.ID })">@Html.DisplayFor(modelItem => item.DisplayName)</a>
             </div>
         </div>

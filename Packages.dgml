@@ -5,6 +5,7 @@
     <Node Id="Antlr 3.4.1.9004" Label="Antlr 3.4.1.9004" Category="Package" />
     <Node Id="bootstrap 3.0.0" Label="bootstrap 3.0.0" Category="Package" />
     <Node Id="EntityFramework 6.1.1" Label="EntityFramework 6.1.1" Category="Package" />
+    <Node Id="ImageProcessor 2.2.0.0" Label="ImageProcessor 2.2.0.0" Category="Package" />
     <Node Id="jQuery 1.10.2" Label="jQuery 1.10.2" Category="Package" />
     <Node Id="jQuery.Validation 1.11.1" Label="jQuery.Validation 1.11.1" Category="Package" />
     <Node Id="Microsoft.AspNet.Mvc 5.2.2" Label="Microsoft.AspNet.Mvc 5.2.2" Category="Package" />
@@ -45,6 +46,7 @@
     <Link Source="WebGrease 1.5.2" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" />
     <Link Source="FireRosterMVC" Target="bootstrap 3.0.0" Category="Installed Package" />
     <Link Source="FireRosterMVC" Target="EntityFramework 6.1.1" Category="Installed Package" />
+    <Link Source="FireRosterMVC" Target="ImageProcessor 2.2.0.0" Category="Installed Package" />
     <Link Source="FireRosterMVC" Target="Microsoft.AspNet.Mvc 5.2.2" Category="Installed Package" />
     <Link Source="FireRosterMVC" Target="Microsoft.AspNet.Web.Optimization 1.1.3" Category="Installed Package" />
     <Link Source="FireRosterMVC" Target="Microsoft.AspNet.WebApi 5.2.2" Category="Installed Package" />

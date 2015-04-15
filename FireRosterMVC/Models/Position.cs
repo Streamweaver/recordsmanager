@@ -1,6 +1,8 @@
-﻿using System;
+﻿using FireRosterMVC.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -14,22 +16,39 @@ namespace FireRosterMVC.Models
         [StringLength(10)]
         public string Code { get; set; }
 
-        [Display(Name="Reported Hours")]
-        public int? ReportedHours { get; set; }
+        [Required, StringLength(50)]
+        public string Title { get; set; }
+
+        [StringLength(150)]
+        public string Description { get; set; }
 
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
 
+        public Shift Shift { get; set; }
+
+        public int? Status_ID { get; set; }
+        [ForeignKey("Status_ID")]
         public virtual PositionStatus Status { get; set; }
 
+        public int? Staff_ID { get; set; }
+        [ForeignKey("Staff_ID")]
         public virtual Staff Staff { get; set; }
+
+        public int? Location_ID { get; set; }
+        [ForeignKey("Location_ID")]
+        public virtual Location Location { get; set; }
+
+        public int? Rank_ID { get; set; }
+        [ForeignKey("Rank_ID")]
+        public virtual Rank Rank { get; set; }
 
         [Display(Name="HR Code")]
         public string HRCode  // Format of the position coded used at HR
@@ -38,7 +57,7 @@ namespace FireRosterMVC.Models
             {
                 if (Code == null)
                 {
-                    return "";
+                    return null;
                 }
                 else
                 {
@@ -52,14 +71,7 @@ namespace FireRosterMVC.Models
         {
             get
             {
-                if (Code == null)
-                {
-                    return "Position ID " + ID;
-                }
-                else
-                {
-                    return Code;
-                }
+                return Rank.Code + " " + Location.Name + " - " + Shift + " (" + Code + ")";
             }
         }
     }

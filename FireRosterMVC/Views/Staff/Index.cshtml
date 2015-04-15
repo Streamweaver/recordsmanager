@@ -36,21 +36,10 @@
                 </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => dummy.CDL)
-                <a href="@Url.Action("Index", "Staff", new { sortField="cdl" })">
-                    <i class="glyphicon glyphicon-collapse-down"></i>
-                    <span class="sr-only">Sort by</span>
-                </a>
+                Position
             </th>
             <th>
-                @Html.DisplayNameFor(model => dummy.HenricoUserID)
-                <a href="@Url.Action("Index", "Staff", new { sortField="userid" })">
-                    <i class="glyphicon glyphicon-collapse-down"></i>
-                    <span class="sr-only">Sort by</span>
-                </a>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => dummy.CurrentAssignment)
+                @Html.DisplayNameFor(model => dummy.OracleHrID)
             </th>
             <th>
                 Action
@@ -62,15 +51,15 @@
                 <td>
                     @Html.ActionLink(item.DisplayName, "Details", new { id = item.ID })
                 </td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.CDL.Label)
+                    @Html.DisplayFor(modelItem => item.CurrentPositions.FirstOrDefault().DisplayName)
                 </td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.HenricoUserID)
+                    @Html.DisplayFor(modelItem => item.OracleHrID)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CurrentAssignment)
-                </td>
+
                 <td>
                     <a href="@Url.Action("Edit", "Staff", new { id=item.ID })">
                         <i class="glyphicon glyphicon-edit"></i>

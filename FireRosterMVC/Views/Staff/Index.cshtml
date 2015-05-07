@@ -14,9 +14,9 @@
         @using (Html.BeginForm("Index", "Staff", FormMethod.Get, new { @class = "form-inline" }))
         {
             <div class="form-group">
-                @Html.Label("Filter by")
-                @Html.DropDownList("StatusFilter")
-                @Html.Label("Name") @Html.TextBox("SearchString")
+                @Html.Label("Filter by",new { @class="control-label"})
+                @Html.DropDownList("StatusFilter", null, new { @class="form-control" })
+                @Html.Label("Name", new { @class="control-label"}) @Html.TextBox("SearchString", null, new { @placeholder = "First/Last Name or Emp # ...", @class="form-control" })
                 <button type="submit" class="btn btn-sm btn-primary">
                     <i class="glyphicon glyphicon-search"></i>
                     <span class="sr-only">Search</span>
@@ -30,10 +30,6 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => dummy.DisplayName)
-                <a href="@Url.Action("Index", "Staff", new { sortField="name" })">
-                    <i class="glyphicon glyphicon-collapse-down"></i>
-                    <span class="sr-only">Sort by</span>
-                </a>
             </th>
             <th>
                 Position
@@ -75,7 +71,7 @@
 
     </table>
     <div class="panel-footer">
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount for @Model.TotalItemCount staff found.
 
         @Html.PagedListPager(Model, page => Url.Action("Index",
         new

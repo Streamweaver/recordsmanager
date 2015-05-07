@@ -40,28 +40,26 @@ namespace FireRosterMVC.Models
         [StringLength(50), Display(Name = "Suffix")]
         public string NameSuffix { get; set; }
 
+        // NOTE do not use DateType.Date here as Chrome overrides the value
+        // SEE http://stackoverflow.com/questions/18275009/asp-net-mvc-c-sharp-chrome-not-showing-date-in-edit-mode
+        // http://updates.html5rocks.com/2012/08/Quick-FAQs-on-input-type-date-in-Google-Chrome
         [Display(Name = "Date of Birth")]
-        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfBirth { get; set; }
 
         [Display(Name = "Rank Date")]
-        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? RankDate { get; set; }
 
         [Display(Name = "CD Date")]
-        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? CareerDevelopmentDate { get; set; }
 
         [Display(Name = "Date of Hire")]
-        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? EmploymentDate { get; set; }
 
         [Display(Name = "Date of Termination")]
-        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? TerminationDate { get; set; }
 

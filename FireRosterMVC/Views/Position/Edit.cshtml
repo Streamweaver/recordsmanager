@@ -24,17 +24,52 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ReportedHours, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ReportedHours, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReportedHours, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Staff_ID, htmlAttributes: new { @class = "control-label col-md-2" }) 
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Staff_ID, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter a staff id" } })
+                <a href="#">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </a>
+               @Html.ValidationMessageFor(m => m.Staff_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rank, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Rank_ID", null, "-- Select --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Rank_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Location_ID", null, "-- Select --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Location_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Shift, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.Shift, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Shift)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.StartDate, @"{0:MM\/dd\/yyyy}", new { @class = "form-control datepicker", @placeholder = "MM/dd/yyyy" })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,8 +77,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.EndDate, @"{0:MM\/dd\/yyyy}", new { @class = "form-control datepicker", @placeholder = "MM/dd/yyyy" })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Status_ID", null, "-- Select --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Status_ID)
             </div>
         </div>
 

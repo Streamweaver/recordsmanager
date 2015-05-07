@@ -9,7 +9,23 @@
 <div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Staff.DisplayName)
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Staff)
         </dt>
         <dd>
             @if (Model.Staff == null)
@@ -23,19 +39,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Code)
+            @Html.DisplayNameFor(model => model.Rank)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Code)
+            @Html.DisplayFor(model => model.Rank.Code)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ReportedHours)
+           @Html.DisplayNameFor(model => model.Location)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ReportedHours)
+            @Html.ActionLink(Model.Location.Name, "Details", "Location", new { id = Model.Location_ID }, null)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shift)
         </dd>
 
         <dt>

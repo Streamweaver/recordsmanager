@@ -1,4 +1,5 @@
-﻿@model FireRosterMVC.Models.Location
+﻿@using FireRosterMVC.Enums
+@model FireRosterMVC.Models.Location
 
 @{
     ViewBag.Title = @Html.DisplayFor(model => model.Name) + " - Details";
@@ -95,3 +96,29 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<hr />
+<h2>Roster for Today (@DateTime.Now)</h2>
+
+@{
+    var shifts = Model.Positions.Where(model => model.StartDate <= DateTime.Now).Where(model => model.EndDate >= DateTime.Now || model.EndDate == null).GroupBy(model => model.Shift);
+}
+@foreach (var shift in shifts)
+{
+    <div class="col-md-4">
+        <ul class="list-group">
+            <li class="list-group-item"><h4 class="list-group-item-heading">Shift</h4></li>
+            @foreach (var position in shift)
+            {
+                <li class="list-group-item">
+                    @position.Rank.Code 
+                    @if (position.Staff != null)
+                    {
+                        <a href="@Url.Action("Details", "Staff", new { id = position.Staff_ID })">@position.Staff.DisplayName</a>
+                    }
+                    
+                </li>
+            }
+        </ul>
+    </div>
+}
+<div class="clearfix"></div>

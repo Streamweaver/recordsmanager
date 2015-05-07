@@ -47,7 +47,7 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Code,Security,Order")] Rank rank)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Code,Name,Security,Order")] Rank rank)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Code,Security,Order")] Rank rank)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Code,Name,Security,Order")] Rank rank)
         {
             if (ModelState.IsValid)
             {

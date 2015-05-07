@@ -31,6 +31,8 @@ namespace FireRosterMVC.Models
         public string Zip { get; set; }
         public int Order { get; set; }
 
+        public virtual ICollection<Position> Positions { get; set; }
+
         public int? Group_ID { get; set; }
         [ForeignKey("Group_ID")]
         public virtual LocationGroup Group { get; set; }

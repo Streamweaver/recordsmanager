@@ -1,74 +1,87 @@
-﻿@model IEnumerable<FireRosterMVC.Models.Position>
+﻿@model PagedList.IPagedList<FireRosterMVC.Models.Position>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Position List</h2>
+<div class="panel panel-default">
+    <h2>Position List</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Code)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Staff.DisplayName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HRCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReportedHours)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    @{var dummy = Model.FirstOrDefault(); }
+    <table class="table">
+        <tr>
+            <th>
+                Position
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Staff)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.StartDate)
+            -
+                @Html.DisplayNameFor(model => dummy.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Status)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.DisplayName, "Details", new { id = item.ID })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HRCode)     
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Staff.DisplayName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReportedHours)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status.Label)
-        </td>
-        <td>
-            <a href="@Url.Action("Edit", "Position", new { id=item.ID })">
-                <i class="glyphicon glyphicon-edit"></i>
-                <span class="sr-only">Edit</span>
-            </a>
-            <a href="@Url.Action("Delete", "Position", new { id = item.ID })">
-                <i class="glyphicon glyphicon-trash"></i>
-                <span class="sr-only">Delete</span>
-            </a>
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.DisplayName, "Details", new { id = item.ID })
+                </td>
+                <td>
+                    @if (item.Staff != null) {
+                        @Html.ActionLink(item.Staff.DisplayName, "Details", new { id = item.ID })
+                    }
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                -
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.Label)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Position", new { id=item.ID })">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <span class="sr-only">Edit</span>
+                    </a>
+                    <a href="@Url.Action("Delete", "Position", new { id = item.ID })">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <span class="sr-only">Delete</span>
+                    </a>
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+    <div class="panel-footer">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount for @Model.TotalItemCount staff found.
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new
+        {
+            page,
+            sortOrder = ViewBag.CurrentSortOrder,
+            sortField = ViewBag.CurrentSortField,
+            searchString = ViewBag.CurrentFilter,
+            statusFilter = ViewBag.CurrentStatusFilter
+        }))
+    </div>
+</div>

@@ -16,23 +16,21 @@ namespace FireRosterMVC.Models
         [StringLength(10)]
         public string Code { get; set; }
 
-        [Required, StringLength(50)]
+        [StringLength(50)]
         public string Title { get; set; }
 
         [StringLength(150)]
         public string Description { get; set; }
 
         [Display(Name = "Start Date")]
-        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
 
-        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
 
-        public Shift Shift { get; set; }
+        public Shift? Shift { get; set; }
 
         public int? Status_ID { get; set; }
         [ForeignKey("Status_ID")]
@@ -71,7 +69,14 @@ namespace FireRosterMVC.Models
         {
             get
             {
-                return Rank.Code + " " + Location.Name + " - " + Shift + " (" + Code + ")";
+                try
+                {
+                    return Rank.Code + " " + Location.Name + " - " + Shift + " (" + Code + ")";
+                }
+                catch (NullReferenceException e)
+                {
+                    return ID.ToString();
+                }
             }
         }
     }

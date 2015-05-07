@@ -17,15 +17,23 @@ namespace FireRosterMVC.Controllers
 {
     public class StaffController : Controller
     {
-        private FireRosterDB db = new FireRosterDB();
+        private FireRosterDB db;
+
+        public StaffController()
+        {
+            db = new FireRosterDB();
+        }
+
+        public StaffController(FireRosterDB context)
+        {
+            db = context;
+        }
 
         // GET: Staff
-        public ActionResult Index(string sortOrder, string sortField, string searchString, string statusFilter, int? page)
+        public ActionResult Index(string searchString, string statusFilter, int? page)
         {
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            ViewBag.CurrentSortOrder = String.IsNullOrEmpty(sortOrder) ? "asc" : sortOrder.ToLower() ;
-            ViewBag.CurrentSortField = String.IsNullOrEmpty(sortField) ? "name" : sortField.ToLower();
             string activeStatus = String.IsNullOrEmpty(statusFilter) ? "active" : statusFilter.ToLower();
             ViewBag.CurrentStatusFilter = activeStatus;
 
@@ -40,13 +48,14 @@ namespace FireRosterMVC.Controllers
 
             var staff = from s in db.StaffList
                             .Where(s => s.Deleted == false)
+                            .OrderBy(s => s.LastName)
                         select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 ViewBag.CurrentFilter = searchString;
                 staff = staff.Where(s => s.LastName.Contains(searchString)
-                    || s.FirstName.Contains(searchString));
+                    || s.FirstName.Contains(searchString) || s.OracleHrID.Equals(searchString));
             }
 
             // Found details of this in sored database function dbo.udf_isEmployeeActive
@@ -62,32 +71,6 @@ namespace FireRosterMVC.Controllers
                     staff = staff.Where(s => s.EmploymentDate != null && s.EmploymentDate <= DateTime.Now);
                     staff = staff.Where(s => s.TerminationDate == null || s.TerminationDate > DateTime.Now);
                     break;
-            }
-
-            Expression<Func<Staff,Object>> OrderByExpression = s => s.LastName;
-            switch (sortField)
-            {
-                case "name":
-                    OrderByExpression = s => s.LastName;
-                    break;
-                case "cdl":
-                    OrderByExpression = s => s.CDL.Label;
-                    break;
-                case "userid":
-                    OrderByExpression = s => s.HenricoUserID;
-                    break;
-                default:
-                    OrderByExpression = s => s.LastName;
-                    break;
-            }
-
-            if (sortOrder == "desc") 
-            {
-                staff = staff.OrderByDescending(OrderByExpression);
-            }
-            else
-            {
-                staff = staff.OrderBy(OrderByExpression);
             }
             
             return View(staff.ToPagedList(pageNumber, pageSize));
@@ -128,6 +111,9 @@ namespace FireRosterMVC.Controllers
         // GET: Staff/Create
         public ActionResult Create()
         {
+            PopulateGenderDropDownList();
+            PopulateRaceDropDownList();
+            PopulateCDLDropDownList();
             return View();
         }
 
@@ -136,10 +122,11 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "EmployeeID,SSN,NamePrefix,FirstName,MiddleName,LastName,NameSuffix,Sex,Race,DateOfBirth,RankDate,CareerDevelopmentLevel,CareerDevelopmentDate,EmploymentDate,TerminationDate,isMilitaryLeave,RosterRank,HenricoUserID,OracleHrID,BadgeNumber")] Staff Staff)
+        public async Task<ActionResult> Create([Bind(Include = "ID,SSN,NamePrefix,FirstName,MiddleName,LastName,NameSuffix,DateOfBirth,RankDate,CareerDevelopmentDate,EmploymentDate,TerminationDate,MilitaryLeave,RosterRank,HenricoUserID,OracleHrID,BadgeNumber,Gender_ID,Race_ID,CDL_ID")] Staff Staff)
         {
             if (ModelState.IsValid)
             {
+                Staff.CreatedOn = DateTime.Now;
                 db.StaffList.Add(Staff);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -171,15 +158,37 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "EmployeeID,DateCreated,LastUpdateDate,LastUpdateBy,DateRemoved,isRemoved,isTestData,SSN,NamePrefix,FirstName,MiddleName,LastName,NameSuffix,Race,Sex,DateOfBirth,RankDate,CareerDevelopmentLevel,CareerDevelopmentDate,EmploymentDate,TerminationDate,isMilitaryLeave,RosterRank,HenricoUserID,OracleHrID,BadgeNumber")] Staff Staff)
+        public async Task<ActionResult> Edit(Staff staff)
         {
+            Staff f = db.StaffList.Find(staff.ID);
+            f.SSN = staff.SSN;
+            f.NamePrefix = staff.NamePrefix;
+            f.FirstName = staff.FirstName;
+            f.MiddleName = staff.MiddleName;
+            f.LastName = staff.LastName;
+            f.NameSuffix = staff.NameSuffix;
+            f.DateOfBirth = staff.DateOfBirth;
+            f.RankDate = staff.RankDate;
+            f.CareerDevelopmentDate = staff.CareerDevelopmentDate;
+            f.EmploymentDate = staff.EmploymentDate;
+            f.TerminationDate = staff.TerminationDate;
+            f.MilitaryLeave = staff.MilitaryLeave;
+            f.RosterRank = staff.RosterRank;
+            f.HenricoUserID = staff.HenricoUserID;
+            f.OracleHrID = staff.OracleHrID;
+            f.BadgeNumber = staff.BadgeNumber;
+            f.Gender_ID = staff.Gender_ID;
+            f.Race_ID = staff.Race_ID;
+            f.CDL_ID = staff.CDL_ID;
+
             if (ModelState.IsValid)
             {
-                db.Entry(Staff).State = EntityState.Modified;
+                f.UpdatedOn = DateTime.Now;
+                db.Entry(f).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Staff", new { id = f.ID });
             }
-            return View(Staff);
+            return View(f);
         }
 
         // GET: Staff/Delete/5
@@ -239,6 +248,18 @@ namespace FireRosterMVC.Controllers
                            orderby c.Label
                            select c;
             ViewBag.CDL_ID = new SelectList(cdlQuery, "ID", "Label", selectedCDL);
+        }
+
+        private void PopulateStatusDropDownList(object selectedStatus = null)
+        {
+            ViewBag.StatusFilter = Enum.GetValues(typeof(Activestatus)).Cast<Activestatus>().Select(
+                v => new SelectListItem
+                {
+                    Text = v.ToString(),
+                    Value = v.ToString().ToLower(),
+                    Selected = v.ToString().ToLower() == selectedStatus
+                }
+                );
         }
 
     }

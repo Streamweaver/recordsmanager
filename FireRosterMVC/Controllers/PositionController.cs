@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FireRosterMVC.Models;
+using FireRosterMVC.Enums;
+using PagedList;
 
 namespace FireRosterMVC.Controllers
 {
@@ -16,9 +18,18 @@ namespace FireRosterMVC.Controllers
         private FireRosterDB db = new FireRosterDB();
 
         // GET: Position
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int? page)
         {
-            return View(await db.Positions.ToListAsync());
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            //string activeStatus = String.IsNullOrEmpty(filterStatus) ? "0" : filterStatus;
+            //ViewBag.CurrentStatusFilter = activeStatus;
+
+            var positions = from p in db.Positions
+                            .OrderBy(p => p.StartDate)
+                            select p;
+
+            return View(positions.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Position/Details/5
@@ -39,6 +50,9 @@ namespace FireRosterMVC.Controllers
         // GET: Position/Create
         public ActionResult Create()
         {
+            PopulateStatusDropDownList();
+            PopulateLocationDropDownList();
+            PopulateRankDrowDownlist();
             return View();
         }
 
@@ -47,15 +61,20 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Code,ReportedHours,StartDate,EndDate")] Position position)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Code,Status_ID,Staff_ID,Location_ID,Rank_ID,Shift,StartDate,EndDate")] Position position)
         {
+            // ValidateDateCodeOverlap(position);
+
             if (ModelState.IsValid)
             {
                 db.Positions.Add(position);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Position", new { id = position.ID });
             }
 
+            PopulateStatusDropDownList(position.Status_ID);
+            PopulateLocationDropDownList(position.Location_ID);
+            PopulateRankDrowDownlist(position.Rank_ID);
             return View(position);
         }
 
@@ -71,6 +90,9 @@ namespace FireRosterMVC.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateStatusDropDownList(position.Status_ID);
+            PopulateLocationDropDownList(position.Location_ID);
+            PopulateRankDrowDownlist(position.Rank_ID);
             return View(position);
         }
 
@@ -79,14 +101,17 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Code,ReportedHours,StartDate,EndDate")] Position position)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Code,Status_ID,Staff_ID,Location_ID,Rank_ID,Shift,StartDate,EndDate")] Position position)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(position).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Position", new { id = position.ID });
             }
+            PopulateStatusDropDownList(position.Status_ID);
+            PopulateLocationDropDownList(position.Location_ID);
+            PopulateRankDrowDownlist(position.Rank_ID);
             return View(position);
         }
 
@@ -124,5 +149,35 @@ namespace FireRosterMVC.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private void PopulateStatusDropDownList(object selectedStatus = null)
+        {
+            var statusQuery = from s in db.PositionStatus
+                           orderby s.Label
+                           select s;
+            ViewBag.Status_ID = new SelectList(statusQuery, "ID", "Label", selectedStatus);
+        }
+
+        private void PopulateLocationDropDownList(object selectedLocation = null)
+        {
+            var locationQuery = from l in db.Locations
+                              orderby l.Order
+                              select l;
+            ViewBag.Location_ID = new SelectList(locationQuery, "ID", "Name", selectedLocation);
+        }
+
+        private void PopulateRankDrowDownlist(object selectedRank = null)
+        {
+            var rankQuery = from r in db.Ranks
+                            orderby r.Order
+                            select r;
+            ViewBag.Rank_ID = new SelectList(rankQuery, "ID", "Code", selectedRank);
+        }
+
+        private void ValidateDateCodeOverlap(Position position)
+        {
+            ModelState.AddModelError(string.Empty, "Position start or end dates overlap with an existing position with the same Code.");
+        }
+
     }
 }

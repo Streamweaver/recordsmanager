@@ -1,7 +1,7 @@
 ﻿@model FireRosterMVC.Models.Staff
 
 @{
-    ViewBag.Title = "Address Detail";
+    ViewBag.Title = @Html.DisplayFor(model => model.DisplayName) + " - Details";
 }
 
 <h2>@Html.DisplayFor(model => model.DisplayName)</h2>

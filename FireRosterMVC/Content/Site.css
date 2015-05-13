@@ -34,3 +34,9 @@ textarea {
     overflow: hidden;
     white-space: nowrap;
 }
+
+/* Extending Form Control a bit */
+
+    .form-inline .form-control-sm {
+        width: 60px;
+    }

@@ -18,7 +18,7 @@ namespace FireRosterMVC.Controllers
         // GET: Rank
         public async Task<ActionResult> Index()
         {
-            return View(await db.Ranks.ToListAsync());
+            return View(await db.Ranks.OrderBy(r => r.Order).ToListAsync());
         }
 
         // GET: Rank/Details/5

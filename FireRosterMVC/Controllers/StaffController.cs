@@ -76,6 +76,23 @@ namespace FireRosterMVC.Controllers
             return View(staff.ToPagedList(pageNumber, pageSize));
         }
 
+        // POST: Staff/AsyncLookUp
+        public JsonResult AsyncLookUp(string term)
+        {
+            var result = new List<KeyValuePair<string, string>>();
+
+            var stafflist = db.StaffList.Where(
+                    s => s.LastName.Contains(term) || 
+                    s.FirstName.Contains(term) || 
+                    s.OracleHrID.Equals(term)).Take(20);
+            
+            foreach (var staff in stafflist) {
+                result.Add(new KeyValuePair<string, string>(staff.ID.ToString(), staff.DisplayName + " - " + staff.OracleHrID));
+            };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Staff/Gallery
         public ActionResult Gallery(int? page)
         {

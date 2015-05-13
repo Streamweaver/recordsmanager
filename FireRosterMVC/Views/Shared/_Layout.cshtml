@@ -3,17 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon"  href="~/Content/favicon.ico" />
     <title>@ViewBag.Title - FireRoster</title>
     @Styles.Render("~/Content/css")
+    @if (IsSectionDefined("ExtraStyles"))
+    {
+        @RenderSection("ExtraStyles");
+    }
+    
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    <!-- Code to wire up DatePicker -->
-    <script type="text/javascript">
-        $(function () {
-            // This will make every element with the class "date-picker" into a DatePicker element
-            $('.datepicker').datepicker();
-        })
-    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -37,6 +35,17 @@
                             <li><a tabindex="-1" href="@Url.Action("Index", "Staff")">List</a></li>
                             <li><a tabindex="-1" href="@Url.Action("Gallery", "Staff")">Gallery</a></li>
                             <li><a tabindex="-1" href="@Url.Action("Create", "Staff")">+ Create New</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Position <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @{ var now = DateTime.Now.ToString("MM/dd/yyyy"); }
+                            <li><a tabindex="-1" href="@Url.Action("Index", "Position", new { period = now })">Current</a></li>
+                            <li><a tabindex="-1" href="@Url.Action("Index", "Position")">All</a></li>
+                            <li><a tabindex="-1" href="@Url.Action("Create", "Position")">+ Create New</a></li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Locations", "Index", "Location")</li>
@@ -74,6 +83,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    
+    @RenderSection("ExtraScripts", required: false);
 </body>
 </html>

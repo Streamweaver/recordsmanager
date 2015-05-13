@@ -18,7 +18,7 @@ namespace FireRosterMVC.Controllers
         // GET: Location
         public async Task<ActionResult> Index()
         {
-            return View(await db.Locations.ToListAsync());
+            return View(await db.Locations.OrderBy(l => l.Order).ToListAsync());
         }
 
         // GET: Location/Details/5

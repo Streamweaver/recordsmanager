@@ -100,13 +100,20 @@
 <h2>Roster for Today (@DateTime.Now)</h2>
 
 @{
-    var shifts = Model.Positions.Where(model => model.StartDate <= DateTime.Now).Where(model => model.EndDate >= DateTime.Now || model.EndDate == null).GroupBy(model => model.Shift);
+    var shifts = Model.Positions.Where(model => model.StartDate <= DateTime.Now).Where(model => model.EndDate >= DateTime.Now || model.EndDate == null).OrderBy(model => model.Shift).GroupBy(model => model.Shift);
 }
 @foreach (var shift in shifts)
 {
     <div class="col-md-4">
         <ul class="list-group">
-            <li class="list-group-item"><h4 class="list-group-item-heading">Shift</h4></li>
+            @{ String headerColor = "active"; }
+            @if(shift.Count() < Model.MinimumComplement)
+            {
+                headerColor = "list-group-item-danger";
+            }
+            <li class="list-group-item @headerColor">
+                <h4 class="list-group-item-heading">Shift @shift.FirstOrDefault().Shift</h4>
+            </li>
             @foreach (var position in shift)
             {
                 <li class="list-group-item">

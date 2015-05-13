@@ -73,7 +73,7 @@ namespace FireRosterMVC.Models
                 {
                     return Rank.Code + " " + Location.Name + " - " + Shift + " (" + Code + ")";
                 }
-                catch (NullReferenceException e)
+                catch (NullReferenceException)
                 {
                     return ID.ToString();
                 }

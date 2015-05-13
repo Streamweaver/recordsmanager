@@ -3,85 +3,134 @@
 
 @{
     ViewBag.Title = "Index";
+    var dummy = Model.FirstOrDefault();
 }
 
 <div class="panel panel-default">
-    <h2>Position List</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    @{var dummy = Model.FirstOrDefault(); }
-    <table class="table">
-        <tr>
-            <th>
-                Position
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => dummy.Staff)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => dummy.Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => dummy.StartDate)
-            -
-                @Html.DisplayNameFor(model => dummy.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => dummy.Status)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
+    <div class="panel-heading text-right">
+        @using (Html.BeginForm("Index", "Position", FormMethod.Get, new { @class = "form-inline" }))
         {
-            <tr>
-                <td>
-                    @Html.ActionLink(item.DisplayName, "Details", new { id = item.ID })
-                </td>
-                <td>
-                    @if (item.Staff != null) {
-                        @Html.ActionLink(item.Staff.DisplayName, "Details", new { id = item.ID })
-                    }
-                    
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Code)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                -
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status.Label)
-                </td>
-                <td>
-                    <a href="@Url.Action("Edit", "Position", new { id=item.ID })">
-                        <i class="glyphicon glyphicon-edit"></i>
-                        <span class="sr-only">Edit</span>
-                    </a>
-                    <a href="@Url.Action("Delete", "Position", new { id = item.ID })">
-                        <i class="glyphicon glyphicon-trash"></i>
-                        <span class="sr-only">Delete</span>
-                    </a>
-                </td>
-            </tr>
+            <div class="form-group form-group-sm">
+                @Html.Label("State_ID", "State", new { @class = "control-label"})
+                @Html.DropDownList("State_ID", null, "--", new { @class = "form-control"})
+
+                @Html.Label("Code", "Code", new { @class = "control-label" })
+                @Html.TextBox("Code", null, new { @class = "form-control form-control-sm", @Value = @ViewBag.currentCode })
+
+                @Html.Label("Location_ID", "Location", new { @class="control-label"})
+                @Html.DropDownList("Location_ID", null, "--", new { @class = "form-control input-sm" })
+
+                @Html.Label("shift", "Shift", new { @class="control-label"})
+                @Html.DropDownList("Shift_ID", null, "--", new { @class = "form-control" })
+
+                @Html.Label("Rank_ID", "Rank", new { @class="control-label"})
+                @Html.DropDownList("Rank_ID", null, "--", new { @class = "form-control input-sm" })
+
+                @Html.Label("Status_ID", "Status", new { @class="control-label"})
+                @Html.DropDownList("Status_ID", null, "--", new { @class = "form-control input-sm"})
+
+                @Html.Label("period", "Date", new { @class = "control-label" })
+                @Html.TextBox("period", null, new { @class = "form-control datepicker input-sm", @placeholder = "Active on ..." })
+
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <span class="sr-only">Search</span>
+                </button>
+            </div>
         }
+    </div>
 
-    </table>
-    <div class="panel-footer">
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount for @Model.TotalItemCount staff found.
+    <div class="panel-body">
+        <h2>Position List</h2>
 
-        @Html.PagedListPager(Model, page => Url.Action("Index",
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+
+        
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>
+                    Position
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Staff)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.StartDate)
+                    -
+                    @Html.DisplayNameFor(model => dummy.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Status)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.DisplayName, "Details", new { id = item.ID })
+                    </td>
+                    <td>
+                        @if (item.Staff != null)
+                        {
+                            @Html.ActionLink(item.Staff.DisplayName, "Details", new { id = item.ID })
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                        -
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Label)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Position", new { id=item.ID })">
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <span class="sr-only">Edit</span>
+                        </a>
+                        <a href="@Url.Action("Delete", "Position", new { id = item.ID })">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span class="sr-only">Delete</span>
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+        <div class="panel-footer">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount for @Model.TotalItemCount positions found.
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
         new
         {
             page,
-            sortOrder = ViewBag.CurrentSortOrder,
-            sortField = ViewBag.CurrentSortField,
-            searchString = ViewBag.CurrentFilter,
-            statusFilter = ViewBag.CurrentStatusFilter
+            Code = ViewBag.CurrentCode,
+            Location_ID = ViewBag.CurrentLocation_ID,
+            Rank_ID = ViewBag.CurrentRank_ID,
+            Status_ID = ViewBag.CurrentStatus_ID,
+            period = ViewBag.CurrentPeriod,
+            Shift_ID = ViewBag.CurrentShift,
+            Staff_ID = ViewBag.CurrentStaff_ID
         }))
+        </div>
     </div>
-</div>
+
+@section ExtraScripts {
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/Scripts/FireRosterDatePicker.js")
+}
+@section ExtraStyles {
+    @Styles.Render("~/Content/themes/base/jquery-ui");
+}

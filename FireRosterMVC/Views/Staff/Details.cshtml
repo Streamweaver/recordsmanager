@@ -208,6 +208,9 @@
                     @Html.DisplayFor(p => position.StartDate) - @Html.DisplayFor(p => position.EndDate)
                 </li>
             }
+            <li class="list-group-item text-right">
+                <a href="@Url.Action("Index", "Position", new { Staff_ID = Model.ID })" class="small">view all positions >></a>
+            </li>
         </ul>
     </div>
     <div class="col-md-4 panel-body">

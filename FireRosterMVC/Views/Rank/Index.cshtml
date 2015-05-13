@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Security)
+            @Html.DisplayNameFor(model => model.Order)
         </th>
         <th>Action</th>
     </tr>
@@ -32,7 +32,7 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Security)
+            @Html.DisplayFor(modelItem => item.Order)
         </td>
         <td>
             <a href="@Url.Action("Edit", "Rank", new { id=item.ID })">

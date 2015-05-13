@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using FireRosterMVC.Models;
 using FireRosterMVC.Enums;
 using PagedList;
+using System.Globalization;
 
 namespace FireRosterMVC.Controllers
 {
@@ -18,16 +19,82 @@ namespace FireRosterMVC.Controllers
         private FireRosterDB db = new FireRosterDB();
 
         // GET: Position
-        public ActionResult Index(int? page)
+        public ActionResult Index(string Code, int? State_ID, int? Location_ID, int? Shift_ID, int? Rank_ID, int? Status_ID, string period, int? Staff_ID, int? page, int? size)
         {
-            int pageSize = 20;
+            int pageSize = (size ?? 20);
             int pageNumber = (page ?? 1);
-            //string activeStatus = String.IsNullOrEmpty(filterStatus) ? "0" : filterStatus;
-            //ViewBag.CurrentStatusFilter = activeStatus;
+
+            PopulateRankDropDownlist(Rank_ID);
+            PopulateLocationDropDownList(Location_ID);
+            PopulateStatusDropDownList(Status_ID);
+            PopulateShiftDropDownList(Shift_ID);
+            PopulateStateDropDownList(State_ID);
 
             var positions = from p in db.Positions
-                            .OrderBy(p => p.StartDate)
+                            .OrderByDescending(p => p.StartDate)
                             select p;
+
+            if (Shift_ID != null)
+            {
+                positions = positions.Where(p => p.Shift == (Shift)Shift_ID);
+                ViewBag.CurrentShift = Shift_ID;
+            }
+
+            if (Rank_ID != null)
+            {
+                positions = positions.Where(p => p.Rank_ID == Rank_ID);
+                ViewBag.CurrentRank_ID = Rank_ID;
+            }
+
+            if (Status_ID != null)
+            {
+                positions = positions.Where(p => p.Status_ID == Status_ID);
+                ViewBag.CurrentStatus_ID = Status_ID;
+            }
+
+            if (Location_ID != null)
+            {
+                positions = positions.Where(p => p.Location_ID == Location_ID);
+                ViewBag.CurrentLocation_ID = Location_ID;
+            }
+
+            if (!String.IsNullOrEmpty(Code))
+            {
+                positions = positions.Where(p => p.Code.Equals(Code));
+                ViewBag.CurrentCode = Code;
+            }
+
+            if (Staff_ID != null)
+            {
+                positions = positions.Where(p => p.Staff_ID == Staff_ID);
+                ViewBag.CurrentStaff_ID = Staff_ID;
+            }
+
+            if (State_ID != null)
+            {
+                ViewBag.CurrentState_ID = State_ID;
+            }
+            switch (State_ID)
+            {  
+                case 0:
+                    positions = positions.Where(p => p.Staff_ID == null);
+                    break;
+                case 1:
+                    positions = positions.Where(p => p.Staff_ID != null);
+                    break;
+                default: // defaults to all
+                    break;
+            }
+
+            CultureInfo enUS = new CultureInfo("en-US");
+            DateTime dt;
+            if (DateTime.TryParseExact(period, "MM/dd/yyyy", enUS, DateTimeStyles.None, out dt))
+            {
+                positions = positions
+                    .Where(p => p.StartDate <= dt)
+                    .Where(p => p.EndDate >= dt || p.EndDate == null);
+                ViewBag.CurrentPeriod = period;
+            }
 
             return View(positions.ToPagedList(pageNumber, pageSize));
         }
@@ -52,7 +119,7 @@ namespace FireRosterMVC.Controllers
         {
             PopulateStatusDropDownList();
             PopulateLocationDropDownList();
-            PopulateRankDrowDownlist();
+            PopulateRankDropDownlist();
             return View();
         }
 
@@ -63,7 +130,7 @@ namespace FireRosterMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Code,Status_ID,Staff_ID,Location_ID,Rank_ID,Shift,StartDate,EndDate")] Position position)
         {
-            // ValidateDateCodeOverlap(position);
+            ValidateStartDateOverlap(position);
 
             if (ModelState.IsValid)
             {
@@ -74,7 +141,7 @@ namespace FireRosterMVC.Controllers
 
             PopulateStatusDropDownList(position.Status_ID);
             PopulateLocationDropDownList(position.Location_ID);
-            PopulateRankDrowDownlist(position.Rank_ID);
+            PopulateRankDropDownlist(position.Rank_ID);
             return View(position);
         }
 
@@ -92,7 +159,7 @@ namespace FireRosterMVC.Controllers
             }
             PopulateStatusDropDownList(position.Status_ID);
             PopulateLocationDropDownList(position.Location_ID);
-            PopulateRankDrowDownlist(position.Rank_ID);
+            PopulateRankDropDownlist(position.Rank_ID);
             return View(position);
         }
 
@@ -111,7 +178,7 @@ namespace FireRosterMVC.Controllers
             }
             PopulateStatusDropDownList(position.Status_ID);
             PopulateLocationDropDownList(position.Location_ID);
-            PopulateRankDrowDownlist(position.Rank_ID);
+            PopulateRankDropDownlist(position.Rank_ID);
             return View(position);
         }
 
@@ -166,7 +233,7 @@ namespace FireRosterMVC.Controllers
             ViewBag.Location_ID = new SelectList(locationQuery, "ID", "Name", selectedLocation);
         }
 
-        private void PopulateRankDrowDownlist(object selectedRank = null)
+        private void PopulateRankDropDownlist(object selectedRank = null)
         {
             var rankQuery = from r in db.Ranks
                             orderby r.Order
@@ -174,9 +241,69 @@ namespace FireRosterMVC.Controllers
             ViewBag.Rank_ID = new SelectList(rankQuery, "ID", "Code", selectedRank);
         }
 
-        private void ValidateDateCodeOverlap(Position position)
+        private void PopulateShiftDropDownList(object selectedShift = null)
         {
-            ModelState.AddModelError(string.Empty, "Position start or end dates overlap with an existing position with the same Code.");
+            SelectList shifts = new SelectList(Enum.GetValues(typeof(Shift)).Cast<Shift>().Select(
+                v => new SelectListItem
+                {
+                    Text = v.ToString(),
+                    Value = ((int)v).ToString(),
+                    Selected = (selectedShift != null && (int)v == (int)selectedShift ? true : false)
+                }
+                ).ToList(), "Value", "Text");
+            ViewBag.Shift_ID = shifts;
+        }
+
+        private void PopulateStateDropDownList(object selectedState = null)
+        {
+            SelectList states = new SelectList(Enum.GetValues(typeof(PositionStates)).Cast<PositionStates>().Select(
+                s => new SelectListItem
+                {
+                    Text = s.ToString(),
+                    Value = ((int)s).ToString(),
+                    Selected = (selectedState != null && (int)s == (int)selectedState ? true : false)
+                }
+                ).ToList(), "Value", "Text");
+            ViewBag.State_ID = states;
+        }
+
+        private void ValidateStartDateOverlap(Position position)
+        {
+            // Base position find.
+            var results = from p in db.Positions
+                            .Where(p => p.Code == position.Code)
+                            .Where(p => p.ID != position.ID)
+                          select p;
+
+            // Find position with same code and enddate null or after position.StartDate
+            var results_start = results
+                                    .Where(p => p.StartDate < position.StartDate)
+                                    .Where(p => p.EndDate > position.StartDate || p.EndDate == null);
+            if (results_start.Count() > 0)
+            {
+                ModelState.AddModelError("StartDate",
+                    "A position with this Code has not ended before or on this start date."
+                    );
+            }
+
+            // Find position with same code and start date earlier than position.EndDate
+            var results_end = results
+                                .Where(p => p.StartDate < position.EndDate)
+                                .Where(p => p.EndDate > position.StartDate || position.EndDate == null);
+            if (results_end.Count() > 0)
+            {
+                ModelState.AddModelError(string.Empty,
+                    "A position with thie Code overlaps this start and end date periods."
+                    );
+            }
+
+            // Make sure position.EndDate greater than position.StartDate
+            if (position.StartDate > position.EndDate)
+            {
+                ModelState.AddModelError("EndDate",
+                    "A position cannot end before it starts."
+                    );
+            }
         }
 
     }

@@ -26,5 +26,13 @@ namespace FireRosterMVC.Models
         {
             Order = 9999;
         }
+
+        public string DisplayName
+        {
+            get
+            {
+                return (Name ?? Code);
+            }
+        }
     }
 }

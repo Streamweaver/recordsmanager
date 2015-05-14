@@ -11,6 +11,7 @@
         @using (Html.BeginForm("Index", "Position", FormMethod.Get, new { @class = "form-inline" }))
         {
             <div class="form-group form-group-sm">
+               
                 @Html.Label("State_ID", "State", new { @class = "control-label"})
                 @Html.DropDownList("State_ID", null, "--", new { @class = "form-control"})
 
@@ -20,18 +21,18 @@
                 @Html.Label("Location_ID", "Location", new { @class="control-label"})
                 @Html.DropDownList("Location_ID", null, "--", new { @class = "form-control input-sm" })
 
-                @Html.Label("shift", "Shift", new { @class="control-label"})
-                @Html.DropDownList("Shift_ID", null, "--", new { @class = "form-control" })
-
-                @Html.Label("Rank_ID", "Rank", new { @class="control-label"})
-                @Html.DropDownList("Rank_ID", null, "--", new { @class = "form-control input-sm" })
-
-                @Html.Label("Status_ID", "Status", new { @class="control-label"})
-                @Html.DropDownList("Status_ID", null, "--", new { @class = "form-control input-sm"})
-
                 @Html.Label("period", "Date", new { @class = "control-label" })
                 @Html.TextBox("period", null, new { @class = "form-control datepicker input-sm", @placeholder = "Active on ..." })
+                
+                @Html.Label("shift", "Shift", new { @class = "control-label" })
+                @Html.DropDownList("Shift_ID", null, "--", new { @class = "form-control" })
 
+                @Html.Label("Rank_ID", "Rank", new { @class = "control-label" })
+                @Html.DropDownList("Rank_ID", null, "--", new { @class = "form-control input-sm" })
+
+                @Html.Label("Status_ID", "Status", new { @class = "control-label" })
+                @Html.DropDownList("Status_ID", null, "--", new { @class = "form-control input-sm" })
+                
                 <button type="submit" class="btn btn-sm btn-primary">
                     <i class="glyphicon glyphicon-search"></i>
                     <span class="sr-only">Search</span>
@@ -79,7 +80,7 @@
                     <td>
                         @if (item.Staff != null)
                         {
-                            @Html.ActionLink(item.Staff.DisplayName, "Details", new { id = item.ID })
+                            <a href="@Url.Action("Details", "Staff", new { id = item.Staff_ID })">@item.Staff.DisplayName</a>
                         }
 
                     </td>

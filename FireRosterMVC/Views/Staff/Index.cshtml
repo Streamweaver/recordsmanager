@@ -49,7 +49,10 @@
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.CurrentPositions.FirstOrDefault().DisplayName)
+                    @if (item.CurrentPositions.Count() > 0)
+                    {
+                        <a href="@Url.Action("Details", "Position", new { id = item.CurrentPositions.FirstOrDefault().ID })">@item.CurrentPositions.FirstOrDefault().DisplayName</a>
+                    }
                 </td>
 
                 <td>

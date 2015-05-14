@@ -12,6 +12,7 @@ using PagedList;
 using System.Linq.Expressions;
 using FireRosterMVC.Enums;
 using System.Data.Entity.Infrastructure;
+using System.Text.RegularExpressions;
 
 namespace FireRosterMVC.Controllers
 {
@@ -79,12 +80,23 @@ namespace FireRosterMVC.Controllers
         // POST: Staff/AsyncLookUp
         public JsonResult AsyncLookUp(string term)
         {
+            string raw = Regex.Replace(term, @"[^\w\s]", string.Empty);
+            string[] terms = raw.Split(' ');
+
             var result = new List<KeyValuePair<string, string>>();
 
-            var stafflist = db.StaffList.Where(
-                    s => s.LastName.Contains(term) || 
-                    s.FirstName.Contains(term) || 
-                    s.OracleHrID.Equals(term)).Take(20);
+            var stafflist = from s in db.StaffList
+                                select s;
+            
+            foreach (string word in terms) 
+            {
+                stafflist = stafflist.Where(
+                    s => s.LastName.Contains(word) || 
+                    s.FirstName.Contains(word) || 
+                    s.OracleHrID.Equals(word));
+            }
+
+            stafflist = stafflist.Take(20);
             
             foreach (var staff in stafflist) {
                 result.Add(new KeyValuePair<string, string>(staff.ID.ToString(), staff.DisplayName + " - " + staff.OracleHrID));

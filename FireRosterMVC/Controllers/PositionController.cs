@@ -170,6 +170,7 @@ namespace FireRosterMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ID,Code,Status_ID,Staff_ID,Location_ID,Rank_ID,Shift,StartDate,EndDate")] Position position)
         {
+            ValidateStartDateOverlap(position);
             if (ModelState.IsValid)
             {
                 db.Entry(position).State = EntityState.Modified;
@@ -269,13 +270,13 @@ namespace FireRosterMVC.Controllers
 
         private void ValidateStartDateOverlap(Position position)
         {
-            // Base position find.
+            // Base position find based on code.
             var results = from p in db.Positions
                             .Where(p => p.Code == position.Code)
                             .Where(p => p.ID != position.ID)
                           select p;
 
-            // Find position with same code and enddate null or after position.StartDate
+            // It is invalid if the start date falls within an existing position date range.
             var results_start = results
                                     .Where(p => p.StartDate < position.StartDate)
                                     .Where(p => p.EndDate > position.StartDate || p.EndDate == null);
@@ -286,10 +287,10 @@ namespace FireRosterMVC.Controllers
                     );
             }
 
-            // Find position with same code and start date earlier than position.EndDate
+            // It is invalid if the end date falls within an existing position range.
             var results_end = results
                                 .Where(p => p.StartDate < position.EndDate)
-                                .Where(p => p.EndDate > position.StartDate || position.EndDate == null);
+                                .Where(p => p.EndDate > position.EndDate || p.EndDate == null);
             if (results_end.Count() > 0)
             {
                 ModelState.AddModelError(string.Empty,
@@ -297,7 +298,17 @@ namespace FireRosterMVC.Controllers
                     );
             }
 
-            // Make sure position.EndDate greater than position.StartDate
+            // it is invalid if an existing position falls within the date range of this position.
+            var results_btwn = results
+                                .Where(p => p.StartDate > position.StartDate)
+                                .Where(p => p.EndDate < position.EndDate || position.EndDate == null);
+            if (results_btwn.Count() > 0)
+            {
+                ModelState.AddModelError(string.Empty,
+                    "Another positions with this Code falls inside the start and end dates of this position.");
+            }
+
+            // It is invalid if the end date comes before the start date
             if (position.StartDate > position.EndDate)
             {
                 ModelState.AddModelError("EndDate",

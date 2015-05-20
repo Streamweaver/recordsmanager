@@ -16,18 +16,19 @@ namespace FireRosterMVC.Controllers
         private FireRosterDB db = new FireRosterDB();
 
         // GET: Phone
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int staffId)
         {
-            return View(await db.Phones.ToListAsync());
+            return View(await db.Phones.Where(p => p.Staff_ID == staffId).ToListAsync());
         }
 
         // GET: Phone/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(int staffId, int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Phone phone = await db.Phones.FindAsync(id);
             if (phone == null)
             {
@@ -37,8 +38,15 @@ namespace FireRosterMVC.Controllers
         }
 
         // GET: Phone/Create
-        public ActionResult Create()
+        public ActionResult Create(int staffId)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            ViewBag.StaffID = staff.ID;
+            PopulateTypeDropDownList();
             return View();
         }
 
@@ -47,26 +55,41 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Number,Primary")] Phone phone)
+        public async Task<ActionResult> Create(int staffId, [Bind(Include = "ID,Number,Type_ID,Primary")] Phone phone)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            ViewBag.StaffID = staff.ID;
+            phone.Staff_ID = staff.ID;
+
             if (ModelState.IsValid)
             {
                 db.Phones.Add(phone);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Staff", new { id = staff.ID });
             }
-
+            PopulateTypeDropDownList(phone.Type_ID);
             return View(phone);
         }
 
         // GET: Phone/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(int staffId, int? id)
         {
             
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+
             Phone phone = await db.Phones.FindAsync(id);
             if (phone == null)
             {
@@ -81,24 +104,38 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Number,Primary")] Phone phone)
+        public async Task<ActionResult> Edit(int staffId, [Bind(Include = "ID,Number,Type_ID,Primary")] Phone phone)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            phone.Staff_ID = staff.ID;
+
             if (ModelState.IsValid)
             {
                 db.Entry(phone).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Staff", new { id = staff.ID });
             }
             return View(phone);
         }
 
         // GET: Phone/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(int staffId, int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            ViewBag.StaffID = staff.ID;
+
             Phone phone = await db.Phones.FindAsync(id);
             if (phone == null)
             {
@@ -110,12 +147,12 @@ namespace FireRosterMVC.Controllers
         // POST: Phone/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int staffId, int id)
         {
             Phone phone = await db.Phones.FindAsync(id);
             db.Phones.Remove(phone);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Staff", new { id = staffId });
         }
 
         protected override void Dispose(bool disposing)

@@ -16,14 +16,20 @@ namespace FireRosterMVC.Controllers
         private FireRosterDB db = new FireRosterDB();
 
         // GET: EmergencyContacts
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int staffId)
         {
-            return View(await db.EmergencyContacts.ToListAsync());
+            return View(await db.EmergencyContacts.Where(e => e.Staff_ID == staffId).ToListAsync());
         }
 
         // GET: EmergencyContacts/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(int staffId, int? id)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+ 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -37,8 +43,15 @@ namespace FireRosterMVC.Controllers
         }
 
         // GET: EmergencyContacts/Create
-        public ActionResult Create()
+        public ActionResult Create(int staffId)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            ViewBag.StaffID = staff.ID;
+            PopulateTypeDropDownList();
             return View();
         }
 
@@ -47,30 +60,46 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,FirstName,LastName,Relationship,PhoneNumber,Order")] EmergencyContact emergencyContact)
+        public async Task<ActionResult> Create(int staffId, [Bind(Include = "ID,FirstName,LastName,Relationship,PhoneType_ID,PhoneNumber,Order")] EmergencyContact emergencyContact)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            ViewBag.StaffID = staff.ID;
+            emergencyContact.Staff_ID = staff.ID;
+
             if (ModelState.IsValid)
             {
                 db.EmergencyContacts.Add(emergencyContact);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Staff", new { id = staff.ID });
             }
-
+            PopulateTypeDropDownList(emergencyContact.PhoneType_ID);
             return View(emergencyContact);
         }
 
         // GET: EmergencyContacts/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(int staffId, int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            ViewBag.StaffID = staff.ID;
+
             EmergencyContact emergencyContact = await db.EmergencyContacts.FindAsync(id);
             if (emergencyContact == null)
             {
                 return HttpNotFound();
             }
+            PopulateTypeDropDownList(emergencyContact.PhoneType_ID);
             return View(emergencyContact);
         }
 
@@ -79,19 +108,27 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,FirstName,LastName,Relationship,PhoneNumber,Order")] EmergencyContact emergencyContact)
+        public async Task<ActionResult> Edit(int staffId, [Bind(Include = "ID,FirstName,LastName,Relationship,PhoneType_ID,PhoneNumber,Order")] EmergencyContact emergencyContact)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            emergencyContact.Staff_ID = staff.ID;
+
             if (ModelState.IsValid)
             {
                 db.Entry(emergencyContact).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Staff", new { id = staff.ID });
             }
+            PopulateTypeDropDownList(emergencyContact.PhoneType_ID);
             return View(emergencyContact);
         }
 
         // GET: EmergencyContacts/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(int staffId, int? id)
         {
             if (id == null)
             {
@@ -108,12 +145,12 @@ namespace FireRosterMVC.Controllers
         // POST: EmergencyContacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int staffId, int id)
         {
             EmergencyContact emergencyContact = await db.EmergencyContacts.FindAsync(id);
             db.EmergencyContacts.Remove(emergencyContact);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Staff", new { id = staffId });
         }
 
         protected override void Dispose(bool disposing)
@@ -123,6 +160,14 @@ namespace FireRosterMVC.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void PopulateTypeDropDownList(object selectedType = null)
+        {
+            var typeQuery = from t in db.PhoneTypes
+                            orderby t.Label
+                            select t;
+            ViewBag.PhoneType_ID = new SelectList(typeQuery, "ID", "Label", selectedType);
         }
     }
 }

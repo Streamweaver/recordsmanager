@@ -16,13 +16,14 @@ namespace FireRosterMVC.Controllers
         private FireRosterDB db = new FireRosterDB();
 
         // GET: Address
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int staffId)
         {
-            return View(await db.Address.ToListAsync());
+
+            return View(await db.Address.Where(a => a.Staff_ID == staffId).ToListAsync());
         }
 
         // GET: Address/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(int staffID, int? id)
         {
             if (id == null)
             {
@@ -37,8 +38,14 @@ namespace FireRosterMVC.Controllers
         }
 
         // GET: Address/Create
-        public ActionResult Create()
+        public ActionResult Create(int staffId)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            ViewBag.StaffID = staff.ID;
             return View();
         }
 
@@ -47,26 +54,42 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Street1,Street2,City,State,Zip,Primary")] Address address)
+        public async Task<ActionResult> Create(int staffId, [Bind(Include = "ID,Street1,Street2,City,State,Zip,Primary")] Address address)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            ViewBag.StaffID = staff.ID;
+            address.Staff_ID = staff.ID;
+
             if (ModelState.IsValid)
             {
                 db.Address.Add(address);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Staff", new { id = staff.ID });
             }
 
             return View(address);
         }
 
         // GET: Address/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(int staffId, int? id)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Address address = await db.Address.FindAsync(id);
+           
             if (address == null)
             {
                 return HttpNotFound();
@@ -79,19 +102,26 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Street1,Street2,City,State,Zip,Primary")] Address address)
+        public async Task<ActionResult> Edit(int staffId, [Bind(Include = "ID,Street1,Street2,City,State,Zip,Primary")] Address address)
         {
+            Staff staff = db.StaffList.Find(staffId);
+            if (staff == null)
+            {
+                return HttpNotFound("Staff member not found.");
+            }
+            address.Staff_ID = staffId;
+
             if (ModelState.IsValid)
             {
                 db.Entry(address).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Staff", new { id = staff.ID });
             }
             return View(address);
         }
 
         // GET: Address/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(int staffId, int? id)
         {
             if (id == null)
             {
@@ -108,12 +138,12 @@ namespace FireRosterMVC.Controllers
         // POST: Address/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int staffId, int id)
         {
             Address address = await db.Address.FindAsync(id);
             db.Address.Remove(address);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Staff", new { id = staffId });
         }
 
         protected override void Dispose(bool disposing)

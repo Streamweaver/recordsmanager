@@ -44,5 +44,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Profile", "Details", new { controller = "Staff", id = Model.Staff_ID })
 </p>

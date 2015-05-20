@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using FireRosterMVC.Enums;
 using System.Data.Entity.Infrastructure;
 using System.Text.RegularExpressions;
+using FireRosterMVC.ViewModels;
 
 namespace FireRosterMVC.Controllers
 {
@@ -220,6 +221,45 @@ namespace FireRosterMVC.Controllers
             return View(f);
         }
 
+        // GET: Staff/EditSkills/5
+        public ActionResult EditSkills(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Staff staff = db.StaffList
+                            .Include(i => i.Skills)
+                            .Where(i => i.ID == id)
+                            .Single();
+            if (staff == null)
+            {
+                return HttpNotFound();
+            }
+            PopulateAssignedSkillData(staff);
+            return View(staff);
+        }
+
+        // POST: Staff/EditSkills/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditSkills(int? id, string[] selectedSkills)
+        {
+            Staff s = db.StaffList.Find(id);
+            UpdateStaffSkills(selectedSkills, s);
+
+            if (ModelState.IsValid)
+            {
+                s.UpdatedOn = DateTime.Now;
+                db.Entry(s).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details", "Staff", new { id = s.ID });
+            }
+            return View(s);
+        }
+
         // GET: Staff/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
@@ -291,5 +331,51 @@ namespace FireRosterMVC.Controllers
                 );
         }
 
+        private void PopulateAssignedSkillData(Staff staff)
+        {
+            var allSkills = db.Skills;
+            var staffSkills = new HashSet<int>(staff.Skills.Select(s => s.ID));
+            var viewModel = new List<AssignedSkillData>();
+            foreach (var skill in allSkills)
+            {
+                viewModel.Add(new AssignedSkillData
+                {
+                    SkillID = skill.ID,
+                    Title = skill.Name,
+                    Assigned = staffSkills.Contains(skill.ID)
+                });
+            }
+            ViewBag.Skills = viewModel;
+        }
+
+        private void UpdateStaffSkills(string[] selectedSkills, Staff staff)
+        {
+            if (selectedSkills == null)
+            {
+                staff.Skills = new List<Skill>();
+            }
+            var selectedSkillsHS = new HashSet<string>(selectedSkills);
+            var staffSkills = new HashSet<int>(staff.Skills.Select(s => s.ID));
+            foreach (var skill in db.Skills)
+            {
+                if (selectedSkillsHS.Contains(skill.ID.ToString()))
+                {
+                    if (!staffSkills.Contains(skill.ID))
+                    {
+                        staff.Skills.Add(skill);
+                    }
+                }
+                else
+                {
+                    if (staffSkills.Contains(skill.ID))
+                    {
+                        staff.Skills.Remove(skill);
+                    }
+                }
+            }
+        }
+
     }
+
+
 }

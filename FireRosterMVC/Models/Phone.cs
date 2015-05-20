@@ -17,6 +17,9 @@ namespace FireRosterMVC.Models
         public int? Type_ID { get; set; }
         [ForeignKey("Type_ID")]
         public virtual PhoneType Type { get; set; }
+
+        public int? Staff_ID { get; set; }
+        [ForeignKey("Staff_ID")]
         public virtual Staff Staff { get; set; }
 
         public string DisplayNumber

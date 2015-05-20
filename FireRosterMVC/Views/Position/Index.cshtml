@@ -23,7 +23,16 @@
 
                 @Html.Label("period", "Date", new { @class = "control-label" })
                 @Html.TextBox("period", null, new { @class = "form-control datepicker input-sm", @placeholder = "Active on ..." })
-                
+             
+                @{string nameValue = null; }
+                @if (ViewBag.CurrentStaff_ID != null && Model.Count() > 0)
+                {
+                    nameValue = Model.First().Staff.DisplayName;
+                }
+                @Html.Label("nameSearch", "Staff", new { @class = "control-label" })
+                @Html.TextBox("nameSearch", @nameValue, new { @class = "form-control", @placeholder = "type a name or emp #" })
+                @Html.Hidden("Staff_ID", null, new { @value = ViewBag.CurrenStaff_ID })
+
                 @Html.Label("shift", "Shift", new { @class = "control-label" })
                 @Html.DropDownList("Shift_ID", null, "--", new { @class = "form-control" })
 
@@ -32,7 +41,7 @@
 
                 @Html.Label("Status_ID", "Status", new { @class = "control-label" })
                 @Html.DropDownList("Status_ID", null, "--", new { @class = "form-control input-sm" })
-                
+
                 <button type="submit" class="btn btn-sm btn-primary">
                     <i class="glyphicon glyphicon-search"></i>
                     <span class="sr-only">Search</span>
@@ -40,7 +49,7 @@
             </div>
         }
     </div>
-
+    <div class="clearfix"></div>
     <div class="panel-body">
         <h2>Position List</h2>
 
@@ -131,6 +140,7 @@
 @section ExtraScripts {
     @Scripts.Render("~/bundles/jquery-ui")
     @Scripts.Render("~/Scripts/FireRosterDatePicker.js")
+    @Scripts.Render("~/Scripts/StaffNameLookup.js")
 }
 @section ExtraStyles {
     @Styles.Render("~/Content/themes/base/jquery-ui");

@@ -28,11 +28,7 @@
             @Html.DisplayNameFor(model => model.Staff)
         </dt>
         <dd>
-            @if (Model.Staff == null)
-            {
-                @Html.Display("Not Set")
-            }
-            else
+            @if (Model.Staff != null)
             {
                 @Html.ActionLink(Model.Staff.DisplayName, "Details", "Staff", new { id = Model.Staff.ID }, null)
             }
@@ -51,7 +47,10 @@
         </dt>
 
         <dd>
-            @Html.ActionLink(Model.Location.Name, "Details", "Location", new { id = Model.Location_ID }, null)
+            @if (Model.Location != null) { 
+                @Html.ActionLink(Model.Location.Name, "Details", "Location", new { id = Model.Location_ID }, null)
+            }
+            
         </dd>
 
         <dt>

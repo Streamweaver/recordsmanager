@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -23,6 +24,8 @@ namespace FireRosterMVC.Models
         [Display(Name = "Primary")]
         public bool Primary { get; set; }
 
+        public int? Staff_ID { get; set; }
+        [ForeignKey("Staff_ID")]
         public virtual Staff Staff { get; set; }
 
         public string DisplayAddress

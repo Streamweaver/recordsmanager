@@ -123,11 +123,14 @@
         </div>
         <div class="col-md-4 panel-body">
             <ul class="list-group">
-                <li class="list-group-item active"><strong>Address@(Model.Addresses.Count > 1 ? "es" : ""):</strong></li>
+                <li class="list-group-item active">
+                    <strong>Address@(Model.Addresses.Count > 1 ? "es" : ""):</strong>
+                    <a href="@Url.Action("Create", "Address", new { staffId = Model.ID })" class="pull-right badge">+ add</a>
+                </li>
                 @foreach (var addr in Model.Addresses)
                 {
                 <li class="list-group-item">
-                    <a href="@Url.Action("Details", "Address", new { id = addr.ID })">
+                    <a href="@Url.Action("Details", "Address", new { staffId = Model.ID, id = addr.ID })">
                         @if (!string.IsNullOrWhiteSpace(addr.Street1))
                         {
                             @(addr.Street1)<br />
@@ -151,12 +154,17 @@
                     </a>
                 </li>
                 }
-                <li class="list-group-item active"><strong>Phone Number@(Model.PhoneNumbers.Count > 1 ? "s" : ""):</strong></li>
+                <li class="list-group-item active">
+                    <strong>Phone Number@(Model.PhoneNumbers.Count > 1 ? "s" : ""):</strong>
+                    <a href="@Url.Action("Create", "Phone", new { staffId = Model.ID })" class="pull-right badge">+ add</a>
+                </li>
                 @foreach (var phone in Model.PhoneNumbers)
                 {
                     <li class="list-group-item">
-                        @Html.ActionLink(@phone.DisplayNumber, "Details", "Phone", new { id = @phone.ID }, null)
-                        (@phone.Type.Label)
+                        @Html.ActionLink(@phone.DisplayNumber, "Details", "Phone", new { staffId = Model.ID, id = @phone.ID }, null)
+                        (@if(phone.Type != null) {
+                            @phone.Type.Label;
+                        })
                         @if (phone.Primary == true)
                         { 
                         <i class="glyphicon glyphicon-ok-sign text-success"></i>
@@ -164,20 +172,32 @@
                         }
                     </li>
                 }
-                <li class="list-group-item active"><strong>Emergency Contact@(Model.EmergencyContacts.Count > 1 ? "s" : ""):</strong></li>
+                <li class="list-group-item active">
+                    <strong>Emergency Contact@(Model.EmergencyContacts.Count > 1 ? "s" : ""):</strong>
+                    <a href="@Url.Action("Create", "EmergencyContact", new { staffId = Model.ID })" class="pull-right badge">+ add</a>
+                </li>
                 @foreach (var contact in Model.EmergencyContacts.OrderBy(c => c.Order))
                 {
                     <li class="list-group-item">
-                        @Html.ActionLink(contact.DisplayName, "Details", "EmergencyContact", new { id = contact.ID }, null)
+                        @Html.ActionLink(contact.DisplayName, "Details", "EmergencyContact", new { staffId = Model.ID, id = contact.ID }, null)
                        (@contact.Relationship) <br />
-                        @contact.DisplayNumber (@contact.PhoneType.Label)
+                        @contact.DisplayNumber (@if (contact.PhoneType != null) { @contact.PhoneType.Label; })
                         
                     </li>
                 }
             </ul>
         </div>
         <div class="col-md-4 panel-body text-center">
-            <img src="@Url.Action("Index", "Photo", new { id = Model.ID })" height="325" width="274" />
+            @if (Model.Photo == null)
+            {
+                <img src="~/Content/images/no_image_available.jpg" height="275" width="275" class="img-thumbnail" />
+            }
+            else
+            {
+                <img src="@Url.Action("Index", "Photo", new { id = Model.ID })" height="325" width="274" />
+            }
+            <br />
+            <a href="#" class="badge">change photo</a>
         </div>
     </div>
 
@@ -187,7 +207,10 @@
     <div class="panel-heading"><h3 class="panel-title">Professional Information</h3></div>
     <div class="col-md-4 panel-body">
         <ul class="list-group">
-            <li class="list-group-item active"><strong>Skill List:</strong></li>
+            <li class="list-group-item active">
+                <strong>Skill List:</strong>
+                <a href="@Url.Action("EditSkills", "Staff", new { id = Model.ID })" class="pull-right badge">Edit</a>
+            </li>
             @foreach (var skill in Model.Skills)
             {
                 <li class="list-group-item">

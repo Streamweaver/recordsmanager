@@ -272,6 +272,7 @@ namespace FireRosterMVC.Controllers
         {
             // Base position find based on code.
             var results = from p in db.Positions
+                            .Where(p => p.Code != null)
                             .Where(p => p.Code == position.Code)
                             .Where(p => p.ID != position.ID)
                           select p;

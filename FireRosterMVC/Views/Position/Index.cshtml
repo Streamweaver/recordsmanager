@@ -7,46 +7,55 @@
 }
 
 <div class="panel panel-default">
-    <div class="panel-heading text-right">
+    <div class="panel-heading clearfix">
         @using (Html.BeginForm("Index", "Position", FormMethod.Get, new { @class = "form-inline" }))
         {
-            <div class="form-group form-group-sm">
-               
-                @Html.Label("State_ID", "State", new { @class = "control-label"})
-                @Html.DropDownList("State_ID", null, "--", new { @class = "form-control"})
-
-                @Html.Label("Code", "Code", new { @class = "control-label" })
-                @Html.TextBox("Code", null, new { @class = "form-control form-control-sm", @Value = @ViewBag.currentCode })
-
-                @Html.Label("Location_ID", "Location", new { @class="control-label"})
-                @Html.DropDownList("Location_ID", null, "--", new { @class = "form-control input-sm" })
-
-                @Html.Label("period", "Date", new { @class = "control-label" })
-                @Html.TextBox("period", null, new { @class = "form-control datepicker input-sm", @placeholder = "Active on ..." })
-             
-                @{string nameValue = null; }
-                @if (ViewBag.CurrentStaff_ID != null && Model.Count() > 0)
-                {
-                    nameValue = Model.First().Staff.DisplayName;
-                }
-                @Html.Label("nameSearch", "Staff", new { @class = "control-label" })
-                @Html.TextBox("nameSearch", @nameValue, new { @class = "form-control", @placeholder = "type a name or emp #" })
-                @Html.Hidden("Staff_ID", null, new { @value = ViewBag.CurrenStaff_ID })
-
-                @Html.Label("shift", "Shift", new { @class = "control-label" })
-                @Html.DropDownList("Shift_ID", null, "--", new { @class = "form-control" })
-
-                @Html.Label("Rank_ID", "Rank", new { @class = "control-label" })
-                @Html.DropDownList("Rank_ID", null, "--", new { @class = "form-control input-sm" })
-
-                @Html.Label("Status_ID", "Status", new { @class = "control-label" })
-                @Html.DropDownList("Status_ID", null, "--", new { @class = "form-control input-sm" })
-
-                <button type="submit" class="btn btn-sm btn-primary">
-                    <i class="glyphicon glyphicon-search"></i>
-                    <span class="sr-only">Search</span>
-                </button>
-            </div>
+            <fieldset class="col-md-9">
+                <div class="form-group form-group-sm">
+                    @Html.Label("State_ID", "State", new { @class = "control-label" })
+                    @Html.DropDownList("State_ID", null, "--", new { @class = "form-control" })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("Code", "Code", new { @class = "control-label" })
+                    @Html.TextBox("Code", null, new { @class = "form-control form-control-sm", @Value = @ViewBag.currentCode })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("Location_ID", "Location", new { @class = "control-label" })
+                    @Html.DropDownList("Location_ID", null, "--", new { @class = "form-control input-sm" })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("period", "Date", new { @class = "control-label" })
+                    @Html.TextBox("period", null, new { @class = "form-control datepicker input-sm", @placeholder = "Active on ..." })
+                </div>
+                <div class="form-group form-group-sm">
+                    @{string nameValue = null; }
+                    @if (ViewBag.CurrentStaff_ID != null && Model.Count() > 0)
+                    {
+                        nameValue = Model.First().Staff.DisplayName;
+                    }
+                    @Html.Label("nameSearch", "Staff", new { @class = "control-label" })
+                    @Html.TextBox("nameSearch", @nameValue, new { @class = "form-control", @placeholder = "type a name or emp #" })
+                    @Html.Hidden("Staff_ID", null, new { @value = ViewBag.CurrenStaff_ID })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("shift", "Shift", new { @class = "control-label" })
+                    @Html.DropDownList("Shift_ID", null, "--", new { @class = "form-control" })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("Rank_ID", "Rank", new { @class = "control-label" })
+                    @Html.DropDownList("Rank_ID", null, "--", new { @class = "form-control input-sm" })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("Status_ID", "Status", new { @class = "control-label" })
+                    @Html.DropDownList("Status_ID", null, "--", new { @class = "form-control input-sm" })
+                </div>
+            </fieldset>
+    <fieldset class="col-md-1">
+        <button type="submit" class="btn btn-sm btn-primary">
+            <i class="glyphicon glyphicon-search"></i>
+            <span class="sr-only">Search</span>
+        </button>
+    </fieldset>
         }
     </div>
     <div class="clearfix"></div>
@@ -54,11 +63,11 @@
         <h2>Position List</h2>
 
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("+ Add New", "Create")
         </p>
 
-        
-        <table class="table table-striped table-hover">
+
+        <table class="table table-responsive table-striped table-hover">
             <tr>
                 <th>
                     Position
@@ -105,11 +114,11 @@
                         @Html.DisplayFor(modelItem => item.Status.Label)
                     </td>
                     <td>
-                        <a href="@Url.Action("Edit", "Position", new { id=item.ID })">
+                        <a href="@Url.Action("Edit", "Position", new { id=item.ID })"  title="Edit">
                             <i class="glyphicon glyphicon-edit"></i>
                             <span class="sr-only">Edit</span>
                         </a>
-                        <a href="@Url.Action("Delete", "Position", new { id = item.ID })">
+                        <a href="@Url.Action("Delete", "Position", new { id = item.ID })" title="Delete">
                             <i class="glyphicon glyphicon-trash"></i>
                             <span class="sr-only">Delete</span>
                         </a>
@@ -119,10 +128,10 @@
 
         </table>
     </div>
-        <div class="panel-footer">
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount for @Model.TotalItemCount positions found.
+    <div class="panel-footer">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount for @Model.TotalItemCount positions found.
 
-            @Html.PagedListPager(Model, page => Url.Action("Index",
+        @Html.PagedListPager(Model, page => Url.Action("Index",
         new
         {
             page,
@@ -134,14 +143,14 @@
             Shift_ID = ViewBag.CurrentShift,
             Staff_ID = ViewBag.CurrentStaff_ID
         }))
-        </div>
+    </div>
     </div>
 
-@section ExtraScripts {
-    @Scripts.Render("~/bundles/jquery-ui")
-    @Scripts.Render("~/Scripts/FireRosterDatePicker.js")
-    @Scripts.Render("~/Scripts/StaffNameLookup.js")
-}
-@section ExtraStyles {
-    @Styles.Render("~/Content/themes/base/jquery-ui");
-}
+    @section ExtraScripts {
+        @Scripts.Render("~/bundles/jquery-ui")
+        @Scripts.Render("~/Scripts/FireRosterDatePicker.js")
+        @Scripts.Render("~/Scripts/StaffNameLookup.js")
+    }
+    @section ExtraStyles {
+        @Styles.Render("~/Content/themes/base/jquery-ui");
+    }

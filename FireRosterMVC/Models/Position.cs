@@ -13,15 +13,13 @@ namespace FireRosterMVC.Models
         [Key]
         public int ID { get; set; }
 
-        [StringLength(10)]
+        [StringLength(10), Required]
         public string Code { get; set; }
 
         [StringLength(50)]
         public string Title { get; set; }
 
-        [StringLength(150)]
-        public string Description { get; set; }
-
+        [Required]
         [Display(Name = "Start Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }

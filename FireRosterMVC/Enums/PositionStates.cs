@@ -7,7 +7,7 @@ namespace FireRosterMVC.Enums
 {
     public enum PositionStates
     {
-        Unassigned,
-        Assigned
+        Vacant,
+        Filled
     }
 }

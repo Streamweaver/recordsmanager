@@ -128,7 +128,7 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Code,Status_ID,Staff_ID,Location_ID,Rank_ID,Shift,StartDate,EndDate")] Position position)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Code,Title,Status_ID,Staff_ID,Location_ID,Rank_ID,Shift,StartDate,EndDate")] Position position)
         {
             ValidateStartDateOverlap(position);
 
@@ -168,7 +168,7 @@ namespace FireRosterMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Code,Status_ID,Staff_ID,Location_ID,Rank_ID,Shift,StartDate,EndDate")] Position position)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Code,Title,Status_ID,Staff_ID,Location_ID,Rank_ID,Shift,StartDate,EndDate")] Position position)
         {
             ValidateStartDateOverlap(position);
             if (ModelState.IsValid)

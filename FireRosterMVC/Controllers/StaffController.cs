@@ -326,7 +326,7 @@ namespace FireRosterMVC.Controllers
                 {
                     Text = v.ToString(),
                     Value = v.ToString().ToLower(),
-                    Selected = v.ToString().ToLower() == selectedStatus
+                    Selected = (string)selectedStatus == v.ToString().ToLower()
                 }
                 );
         }

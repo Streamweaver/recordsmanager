@@ -1,19 +1,21 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en-us">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon"  href="~/Content/favicon.ico" />
     <title>@ViewBag.Title - FireRoster</title>
     @Styles.Render("~/Content/css")
     @if (IsSectionDefined("ExtraStyles"))
     {
         @RenderSection("ExtraStyles");
     }
-
+    
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
+
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -49,7 +51,7 @@
                     <li>@Html.ActionLink("Locations", "Index", "Location")</li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Admin
+                        Admin
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
@@ -67,7 +69,7 @@
 
                     </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <p class="nav navbar-text navbar-right">Hello, @User.Identity.Name</p>
             </div>
         </div>
     </div>
@@ -81,7 +83,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-
+    
     @RenderSection("ExtraScripts", required: false);
 </body>
 </html>

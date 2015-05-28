@@ -62,6 +62,9 @@
                             <li><a tabindex="-1" href="@Url.Action("Index", "PhoneType")">Phone Type</a></li>
                             <li><a tabindex="-1" href="@Url.Action("Index", "PositionStatus")">Position Status</a></li>
                             <li><a tabindex="-1" href="@Url.Action("Index", "Skill")">Skills</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" href="@Url.Action("Index", "UsersAdmin")">Users</a></li>
+                            <li><a tabindex="-1" href="@Url.Action("Index", "RolesAdmin")">Roles</a></li>
                         </ul>
 
 
@@ -81,7 +84,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-
+    @RenderSection("Scripts", required: false)
     @RenderSection("ExtraScripts", required: false);
 </body>
 </html>

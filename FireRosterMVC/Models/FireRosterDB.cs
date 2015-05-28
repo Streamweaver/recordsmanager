@@ -5,12 +5,18 @@ namespace FireRosterMVC.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using FireRosterMVC.Models.Codes;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
-    public partial class FireRosterDB : DbContext
+    public partial class FireRosterDB : IdentityDbContext<ApplicationUser>
     {
         public FireRosterDB()
             : base("name=FireRosterDB")
         {
+        }
+
+        public static FireRosterDB Create()
+        {
+            return new FireRosterDB();
         }
 
         public virtual DbSet<Staff> StaffList { get; set; }

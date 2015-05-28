@@ -192,9 +192,11 @@
     <Compile Include="Controllers\PositionStatusController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
     <Compile Include="Controllers\RankController.cs" />
+    <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Enums\Activestatus.cs" />
     <Compile Include="Enums\PositionStates.cs" />
     <Compile Include="Enums\Shift.cs" />
@@ -293,13 +295,14 @@
     <Compile Include="Migrations\201505211848174_DropPositionDescription.Designer.cs">
       <DependentUpon>201505211848174_DropPositionDescription.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201505221904212_AddIdentityModels.cs" />
-    <Compile Include="Migrations\201505221904212_AddIdentityModels.Designer.cs">
-      <DependentUpon>201505221904212_AddIdentityModels.cs</DependentUpon>
+    <Compile Include="Migrations\201505281903507_AddIdentityRoles.cs" />
+    <Compile Include="Migrations\201505281903507_AddIdentityRoles.Designer.cs">
+      <DependentUpon>201505281903507_AddIdentityRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\Codes\CareerDevelopmentLevel.cs" />
     <Compile Include="Models\EmergencyContact.cs" />
     <Compile Include="Models\FireRosterDB.cs" />
@@ -577,6 +580,16 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\UsersAdmin\Create.cshtml" />
+    <Content Include="Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\RolesAdmin\Create.cshtml" />
+    <Content Include="Views\RolesAdmin\Delete.cshtml" />
+    <Content Include="Views\RolesAdmin\Details.cshtml" />
+    <Content Include="Views\RolesAdmin\Edit.cshtml" />
+    <Content Include="Views\RolesAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -660,8 +673,8 @@
     <EmbeddedResource Include="Migrations\201505211848174_DropPositionDescription.resx">
       <DependentUpon>201505211848174_DropPositionDescription.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505221904212_AddIdentityModels.resx">
-      <DependentUpon>201505221904212_AddIdentityModels.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505281903507_AddIdentityRoles.resx">
+      <DependentUpon>201505281903507_AddIdentityRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -18,16 +18,29 @@ namespace FireRosterMVC.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationRole : IdentityRole
     {
-        public ApplicationDbContext()
-            : base("name=FireRosterDB", throwIfV1Schema: false)
-        {
-        }
+        public ApplicationRole() : base() { }
+        public ApplicationRole(string name) : base(name) { }
+        public string Description { get; set; }
 
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
     }
+
+    //public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    //{
+    //    public ApplicationDbContext()
+    //        : base("name=FireRosterDB", throwIfV1Schema: false)
+    //    {
+    //    }
+
+    //    static ApplicationDbContext()
+    //    {
+    //        Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+    //    }
+
+    //    public static ApplicationDbContext Create()
+    //    {
+    //        return new ApplicationDbContext();
+    //    }
+    //}
 }

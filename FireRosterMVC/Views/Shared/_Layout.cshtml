@@ -32,7 +32,7 @@
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="@Url.Action("Index", "Staff")">List</a></li>
                             <li><a tabindex="-1" href="@Url.Action("Gallery", "Staff")">Gallery</a></li>
-                            <li><a tabindex="-1" href="@Url.Action("Create", "Staff")">+ Create New</a></li>
+                            <li><a tabindex="-1" href="@Url.Action("Create", "Staff")">+ Add New</a></li>
                         </ul>
                     </li>
                     <li>
@@ -43,7 +43,7 @@
                             @{ var now = DateTime.Now.ToString("MM/dd/yyyy"); }
                             <li><a tabindex="-1" href="@Url.Action("Index", "Position", new { period = now })">Current</a></li>
                             <li><a tabindex="-1" href="@Url.Action("Index", "Position")">All</a></li>
-                            <li><a tabindex="-1" href="@Url.Action("Create", "Position")">+ Create New</a></li>
+                            <li><a tabindex="-1" href="@Url.Action("Create", "Position")">+ Add New</a></li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Locations", "Index", "Location")</li>

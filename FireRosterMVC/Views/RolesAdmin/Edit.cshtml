@@ -1,18 +1,16 @@
 ﻿@model FireRosterMVC.Models.RoleViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Role";
 }
 
-<h2>Edit.</h2>
+<h2>Edit Role</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Roles.</h4>
-        <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
@@ -40,7 +38,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.Partial("_EditFooterPartial", new ViewDataDictionary { { "id", Model.Id } })
 </div>
 
 @section Scripts {

@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit - " + @Html.DisplayFor(model => model.Code) + " - Rank";
 }
 
-<h2>Edit Rank: @Html.DisplayFor(model => model.Code)</h2>
+<h2>Edit Rank @Html.DisplayFor(model => model.Code)</h2>
 
 
 @using (Html.BeginForm())
@@ -56,7 +56,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.Partial("_EditFooterPartial", new ViewDataDictionary { { "id", Model.ID } })
 </div>
 
 @section ExtraScripts {

@@ -1,20 +1,20 @@
 ﻿@model IEnumerable<FireRosterMVC.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Users List";
 }
 
-<h2>Index</h2>
+<h2>Users List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("+ Add User", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
-        @*Add a table header for the Address info:*@
+        
         <th>
 
         </th>
@@ -24,12 +24,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserName)
+                @Html.ActionLink(item.UserName, "Details", new { id = item.Id })
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.Partial("_ListActionsPartial", new ViewDataDictionary { { "controller", "UsersAdmin" }, { "id", item.Id } })
             </td>
         </tr>
     }

@@ -114,14 +114,7 @@
                         @Html.DisplayFor(modelItem => item.Status.Label)
                     </td>
                     <td>
-                        <a href="@Url.Action("Edit", "Position", new { id=item.ID })"  title="Edit">
-                            <i class="glyphicon glyphicon-edit"></i>
-                            <span class="sr-only">Edit</span>
-                        </a>
-                        <a href="@Url.Action("Delete", "Position", new { id = item.ID })" title="Delete">
-                            <i class="glyphicon glyphicon-trash"></i>
-                            <span class="sr-only">Delete</span>
-                        </a>
+                        @Html.Partial("_ListActionsPartial", new ViewDataDictionary { { "controller", "Position" }, { "id", item.ID } })
                     </td>
                 </tr>
             }

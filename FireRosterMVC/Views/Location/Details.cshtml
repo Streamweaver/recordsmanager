@@ -93,8 +93,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.Partial("_DetailsFooterPartial", new ViewDataDictionary { { "id", Model.ID } })
 </p>
 <hr />
 <h2>Roster for Today (@DateTime.Now)</h2>

@@ -7,7 +7,7 @@
 <h2>Rank List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("+ Add new", "Create")
 </p>
 <table class="table">
     <tr>
@@ -35,14 +35,7 @@
             @Html.DisplayFor(modelItem => item.Order)
         </td>
         <td>
-            <a href="@Url.Action("Edit", "Rank", new { id=item.ID })">
-                <i class="glyphicon glyphicon-edit"></i>
-                <span class="sr-only">Edit</span>
-            </a>
-            <a href="@Url.Action("Delete", "Rank", new { id=item.ID })">
-                <i class="glyphicon glyphicon-trash"></i>
-                <span class="sr-only">Delete</span>
-            </a>
+@Html.Partial("_ListActionsPartial", new ViewDataDictionary { { "controller", "Rank" }, { "id", item.ID } })
         </td>
     </tr>
 }

@@ -89,7 +89,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="Group_ID">Group</label>
             <div class="col-md-10">
-                @Html.DropDownList("Group_ID", String.Empty)
+                @Html.DropDownList("Group_ID", null, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Group_ID)
             </div>
         </div>
@@ -111,7 +111,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.Partial("_EditFooterPartial", new ViewDataDictionary { { "id", Model.ID } })
 </div>
 
 @section ExtraScripts {

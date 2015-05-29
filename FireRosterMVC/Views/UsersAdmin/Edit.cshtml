@@ -4,15 +4,13 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit.</h2>
+<h2>Edit User</h2>
 
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Edit User Form.</h4>
-        <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
@@ -25,13 +23,15 @@
         </div>
         <div class="form-group">
             @Html.Label("Roles", new { @class = "control-label col-md-2" })
-            <span class=" col-md-10">
+            
                 @foreach (var item in Model.RolesList)
                 {
-                    <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
-                    @Html.Label(item.Value, new { @class = "control-label" })
+                    <div class=" col-md-2 col-lg-1 col-sm-3">
+                        <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                        @Html.Label(item.Value, new { @class = "control-label" })
+                    </div>
                 }
-            </span>
+
         </div>
 
         <div class="form-group">
@@ -43,7 +43,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.Partial("_EditFooterPartial", new ViewDataDictionary { { "id", Model.Id } })
 </div>
 
 @section Scripts {

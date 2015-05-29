@@ -101,7 +101,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.Partial("_EditFooterPartial", new ViewDataDictionary { { "id", Model.ID } })
 </div>
 
 @section ExtraScripts {

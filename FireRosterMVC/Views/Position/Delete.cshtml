@@ -99,23 +99,6 @@
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".delete-modal">Delete ?</button>
-         @Html.ActionLink("Back to List", "Index")
-        <div class="modal fade delete-modal" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Confirm Delete?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <input type="submit" value="Delete" class="btn btn-danger" />
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->   
-        </div><!-- /.modal -->
-
+        @Html.Partial("_DeleteItemPartial")
     }
 </div>

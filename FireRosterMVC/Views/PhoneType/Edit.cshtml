@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit - "  + Model.Label + " - Phone Type";
 }
 
-<h2>Edit: @Html.DisplayFor(model => model.Label)</h2>
+<h2>Edit Phone Type @Html.DisplayFor(model => model.Label)</h2>
 
 
 @using (Html.BeginForm())
@@ -32,7 +32,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.Partial("_EditFooterPartial", new ViewDataDictionary { { "id", Model.ID } })
 </div>
 
 @section ExtraScripts {

@@ -7,7 +7,7 @@
 <h2>Phone List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("+ Add new", "Create")
 </p>
 <table class="table">
     <tr>
@@ -35,14 +35,7 @@
             @Html.DisplayFor(modelItem => item.Primary)
         </td>
         <td>
-            <a href="@Url.Action("Edit", "Phone", new { id=item.ID })">
-                <i class="glyphicon glyphicon-edit"></i>
-                <span class="sr-only">Edit</span>
-            </a>
-            <a href="@Url.Action("Delete", "Phone", new { id=item.ID })">
-                <i class="glyphicon glyphicon-trash"></i>
-                <span class="sr-only">Delete</span>
-            </a>
+            @Html.Partial("_ListActionsPartial", new ViewDataDictionary { { "controller", "Phone" }, { "id", item.ID } })
         </td>
     </tr>
 }

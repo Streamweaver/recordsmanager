@@ -71,50 +71,37 @@ namespace FireRosterMVC.Migrations
 
         public static void InitializeIdentityForEF(FireRosterDB db)
         {
-            //var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            //var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             var roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(db));
 
-            const string name = "admin@example.com";
-            const string password = "Admin@123456";
-            const string roleName = "Admin";
-
-            //Create Role Admin if it does not exist
-            var role = roleManager.FindByName(roleName);
-            if (role == null)
+            Dictionary<string, string> rolesData = new Dictionary<string, string>();
+            rolesData.Add("Admin", "Super users, can do anything.");
+            rolesData.Add("Payroll", "All operations for information related to position and pay");
+            rolesData.Add("Manager", "All operations for staff information, scheduling and Locations.");
+            foreach (KeyValuePair<string, string> roleData in rolesData)
             {
-                role = new ApplicationRole(roleName);
-                var roleresult = roleManager.Create(role);
+                if (roleManager.FindByName(roleData.Key) == null)
+                {
+                    ApplicationRole role = new ApplicationRole(roleData.Key);
+                    role.Description = roleData.Value;
+                    roleManager.Create(role);
+                }
             }
+
+            const string name = "admin@example.com";
+            const string password = "Admin@123456";  // IMPORTANT CHANGE THIS after first login.
+            ApplicationRole adminRole = roleManager.FindByName("Admin");
 
             var user = userManager.FindByName(name);
-            if (user == null)
+            if (db.Users.Count() < 1) // Create initial admin user if no users in DB.
             {
                 user = new ApplicationUser { UserName = name, Email = name };
-                var result = userManager.Create(user, password);
-                result = userManager.SetLockoutEnabled(user.Id, false);
-            }
-
-            // Add user admin to Role Admin if not already added
-            var rolesForUser = userManager.GetRoles(user.Id);
-            if (!rolesForUser.Contains(role.Name))
-            {
-                var result = userManager.AddToRole(user.Id, role.Name);
-            }
-
-            // Add other normal roles to app.
-            List<String> roles = new List<string>();
-            roles.Add("Payroll");
-            roles.Add("RosterUser");
-            roles.Add("CommandStaff");
-
-            foreach (String title in roles)
-            {
-                if (roleManager.FindByName(title) == null)
+                userManager.Create(user, password);
+                userManager.SetLockoutEnabled(user.Id, false);
+                var rolesForUser = userManager.GetRoles(user.Id);
+                if (!rolesForUser.Contains(adminRole.Name))
                 {
-                    role = new ApplicationRole(roleName);
-                    roleManager.Create(role);
+                    userManager.AddToRole(user.Id, adminRole.Name);
                 }
             }
         }

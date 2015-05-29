@@ -60,14 +60,7 @@
                 </td>
 
                 <td>
-                    <a href="@Url.Action("Edit", "Staff", new { id=item.ID })">
-                        <i class="glyphicon glyphicon-edit"></i>
-                        <span class="sr-only">Edit</span>
-                    </a>
-                    <a href="@Url.Action("Delete", "Staff", new { id=item.ID })">
-                        <i class="glyphicon glyphicon-trash"></i>
-                        <span class="sr-only">Delete</span>
-                    </a>
+                    @Html.Partial("_ListActionsPartial", new ViewDataDictionary { { "controller", "Staff" }, { "id", item.ID } })
                 </td>
             </tr>
         }

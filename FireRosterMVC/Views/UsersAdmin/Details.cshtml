@@ -1,14 +1,12 @@
 ﻿@model FireRosterMVC.Models.ApplicationUser
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "User Details";
 }
 
-<h2>Details.</h2>
+<h2>User Details</h2>
 
 <div>
-    <h4>User</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.UserName)
@@ -25,20 +23,17 @@
     <p>No roles found for this user.</p>
 }
 
-<table class="table">
+<ul class="list-group">
 
     @foreach (var item in ViewBag.RoleNames)
     {
-        <tr>
-            <td>
-                @item
-            </td>
-        </tr>
+        <li class="list-group-item">
+            @item
+        </li>
     }
-</table>
+</ul>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.Partial("_DetailsFooterPartial", new ViewDataDictionary { { "id", Model.Id } })
 </p>
 
 

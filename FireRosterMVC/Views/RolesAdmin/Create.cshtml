@@ -1,18 +1,16 @@
 ﻿@model FireRosterMVC.Models.RoleViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add User Role";
 }
 
-<h2>Create.</h2>
+<h2>Add Role</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Role.</h4>
-        <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">

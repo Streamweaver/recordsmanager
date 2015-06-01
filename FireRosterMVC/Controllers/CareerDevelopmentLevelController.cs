@@ -12,6 +12,7 @@ using FireRosterMVC.Models.Codes;
 
 namespace FireRosterMVC.Controllers
 {
+    [Authorize]
     public class CareerDevelopmentLevelController : Controller
     {
         private FireRosterDB db = new FireRosterDB();

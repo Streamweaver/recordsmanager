@@ -11,6 +11,7 @@ using FireRosterMVC.Models;
 
 namespace FireRosterMVC.Controllers
 {
+    [Authorize]
     public class SkillController : Controller
     {
         private FireRosterDB db = new FireRosterDB();

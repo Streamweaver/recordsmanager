@@ -17,6 +17,7 @@ using FireRosterMVC.ViewModels;
 
 namespace FireRosterMVC.Controllers
 {
+    [Authorize]
     public class StaffController : Controller
     {
         private FireRosterDB db;

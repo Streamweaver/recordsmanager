@@ -11,6 +11,7 @@ using FireRosterMVC.Models;
 
 namespace FireRosterMVC.Controllers
 {
+    [Authorize]
     public class LocationController : Controller
     {
         private FireRosterDB db = new FireRosterDB();

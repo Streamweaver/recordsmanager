@@ -12,6 +12,7 @@ using ImageProcessor.Imaging.Formats;
 
 namespace FireRosterMVC.Controllers
 {
+    [Authorize]
     public class PhotoController : Controller
     {
         private FireRosterDB db = new FireRosterDB();

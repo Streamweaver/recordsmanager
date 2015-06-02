@@ -14,6 +14,7 @@ using System.Globalization;
 
 namespace FireRosterMVC.Controllers
 {
+    [Authorize]
     public class PositionController : Controller
     {
         private FireRosterDB db = new FireRosterDB();

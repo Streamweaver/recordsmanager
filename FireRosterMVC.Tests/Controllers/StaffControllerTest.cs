@@ -20,7 +20,7 @@ namespace FireRosterMVC.Tests.Controllers
             // Basing this on https://msdn.microsoft.com/en-us/data/dn314429.aspx#nonQuery
             var data = new List<Staff>{
                 new Staff{ FirstName = "Scott"},
-                new Staff{ FirstName = "Bob" },
+                new Staff{ FirstName = "Jeff" },
                 new Staff{ FirstName = "Ruqsaar"}
             }.AsQueryable();
 
@@ -39,7 +39,7 @@ namespace FireRosterMVC.Tests.Controllers
         public void Staff_Index()
         {
             var ctlr = getController();
-            var rslt = ctlr.Index("", "", "", "", 1) as ViewResult;
+            var rslt = ctlr.Index("", "", 1) as ViewResult;
             Assert.IsNotNull(rslt, "I did not find a response!");
         }
     }

@@ -11,18 +11,20 @@ using FireRosterMVC.Models;
 
 namespace FireRosterMVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Manager")]
     public class PhoneController : Controller
     {
         private FireRosterDB db = new FireRosterDB();
 
         // GET: Phone
+        [Authorize(Roles = "Admin, Manager, Payroll")]
         public async Task<ActionResult> Index(int staffId)
         {
             return View(await db.Phones.Where(p => p.Staff_ID == staffId).ToListAsync());
         }
 
         // GET: Phone/Details/5
+        [Authorize(Roles = "Admin, Manager, Payroll")]
         public async Task<ActionResult> Details(int staffId, int? id)
         {
             if (id == null)

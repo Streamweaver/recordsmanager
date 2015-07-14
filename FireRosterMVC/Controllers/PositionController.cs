@@ -14,7 +14,7 @@ using System.Globalization;
 
 namespace FireRosterMVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Manager, Payroll")]
     public class PositionController : Controller
     {
         private FireRosterDB db = new FireRosterDB();

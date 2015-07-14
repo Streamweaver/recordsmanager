@@ -24,23 +24,18 @@ namespace FireRosterMVC.Models
         public virtual DbSet<Race> Race { get; set; }
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
-
-        public System.Data.Entity.DbSet<Skill> Skills { get; set; }
-
-        public System.Data.Entity.DbSet<EmergencyContact> EmergencyContacts { get; set; }
-
-        public System.Data.Entity.DbSet<LocationGroup> LocationGroups { get; set; }
-
-        public System.Data.Entity.DbSet<Phone> Phones { get; set; }
-
-        public System.Data.Entity.DbSet<PhoneType> PhoneTypes { get; set; }
-
-        public System.Data.Entity.DbSet<Position> Positions { get; set; }
-
-        public System.Data.Entity.DbSet<PositionStatus> PositionStatus { get; set; }
-
-        public System.Data.Entity.DbSet<CareerDevelopmentLevel> CareerDevelopmentLevels { get; set; }
-
-        public System.Data.Entity.DbSet<Rank> Ranks { get; set; }
+        public virtual DbSet<Skill> Skills { get; set; }
+        public virtual DbSet<EmergencyContact> EmergencyContacts { get; set; }
+        public virtual DbSet<LocationGroup> LocationGroups { get; set; }
+        public virtual DbSet<Phone> Phones { get; set; }
+        public virtual DbSet<PhoneType> PhoneTypes { get; set; }
+        public virtual DbSet<Position> Positions { get; set; }
+        public virtual DbSet<PositionStatus> PositionStatus { get; set; }
+        public virtual DbSet<CareerDevelopmentLevel> CareerDevelopmentLevels { get; set; }
+        public virtual DbSet<Rank> Ranks { get; set; }
+        public virtual DbSet<Audit> Audits { get; set; }
+        public virtual DbSet<OvertimeCode> OvertimeCodes { get; set; }
+        public virtual DbSet<Overtime> Overtime { get; set; }
+        public virtual DbSet<OvertimeAvailability> OvertimeAvailability { get; set; }
     }
 }

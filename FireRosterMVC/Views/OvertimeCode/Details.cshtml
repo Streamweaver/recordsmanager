@@ -1,0 +1,47 @@
+﻿@model FireRosterMVC.Models.OvertimeCode
+
+@{
+    ViewBag.Title = "Overtime Code" + Model.Code + "Details";
+}
+
+<h2>Overtime Code @Html.DisplayFor(model => model.Code)</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Label)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Label)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortLabel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortLabel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.Partial("_DetailsFooterPartial", new ViewDataDictionary { { "id", Model.ID } })
+</p>

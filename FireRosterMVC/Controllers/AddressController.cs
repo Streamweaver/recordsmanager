@@ -11,7 +11,7 @@ using FireRosterMVC.Models;
 
 namespace FireRosterMVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Manager")]
     public class AddressController : Controller
     {
         private FireRosterDB db = new FireRosterDB();
@@ -24,6 +24,7 @@ namespace FireRosterMVC.Controllers
         }
 
         // GET: Address/Details/5
+        [Authorize(Roles = "Admin, Manager, Payroll")]
         public async Task<ActionResult> Details(int staffID, int? id)
         {
             if (id == null)

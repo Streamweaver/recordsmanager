@@ -78,6 +78,7 @@ namespace FireRosterMVC.Migrations
             rolesData.Add("Admin", "Super users, can do anything.");
             rolesData.Add("Payroll", "All operations for information related to position and pay");
             rolesData.Add("Manager", "All operations for staff information, scheduling and Locations.");
+            rolesData.Add("Training", "Manages user skills and training details.");
             foreach (KeyValuePair<string, string> roleData in rolesData)
             {
                 if (roleManager.FindByName(roleData.Key) == null)

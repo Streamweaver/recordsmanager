@@ -1,0 +1,136 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<FireRosterMVC.Models.Overtime>
+
+@{
+    ViewBag.Title = "Index";
+    var dummy = Model.FirstOrDefault();
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        @using (Html.BeginForm("Index", "Overtime", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <fieldset class="text-right">
+                <div class="form-group form-group-sm">
+                    @Html.Label("code", "Code", new { @class = "control-label" })
+                    @Html.TextBox("code", null, new { @class = "form-control form-control-sm", @Value = @ViewBag.currentCode })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("period", "Date", new { @class = "control-label" })
+                    @Html.TextBox("period", null, new { @class = "form-control datepicker input-sm", @placeholder = "on ..." })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("Location_ID", "Location", new { @class = "control-label" })
+                    @Html.DropDownList("Location_ID", null, "--", new { @class = "form-control input-sm" })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("shift", "Shift", new { @class = "control-label" })
+                    @Html.DropDownList("Shift_ID", null, "--", new { @class = "form-control" })
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.Label("Status_ID", "Status", new { @class = "control-label" })
+                    @Html.DropDownList("Status_ID", null, "--", new { @class = "form-control input-sm" })
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <span class="sr-only">Search</span>
+                </button>
+            </fieldset>
+        }
+    </div>
+    <div class="clearfix"></div>
+    <div class="panel-body">
+        <h2>Overtime</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Code.Code)
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Staff.DisplayName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Shift)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Start)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.End)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummy.Hours)
+                </th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Staff.DisplayName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shift)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Start)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.End)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hours)
+                    </td>
+                    <td>
+                        @Html.Partial("_ListActionsPartial", new ViewDataDictionary { { "controller", "Overtime" }, { "id", item.ID } })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="panel-footer">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount for @Model.TotalItemCount positions found.
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new
+        {
+            page,
+            period = ViewBag.CurrentPeriod,
+        }))
+    </div>
+</div>
+@section ExtraScripts {
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/Scripts/FireRosterDatePicker.js")
+    @Scripts.Render("~/Scripts/StaffNameLookup.js")
+}
+@section ExtraStyles {
+    @Styles.Render("~/Content/themes/base/jquery-ui")
+}

@@ -11,18 +11,20 @@ using FireRosterMVC.Models;
 
 namespace FireRosterMVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Manager")]
     public class LocationController : Controller
     {
         private FireRosterDB db = new FireRosterDB();
 
         // GET: Location
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             return View(await db.Locations.OrderBy(l => l.Order).ToListAsync());
         }
 
         // GET: Location/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -93,6 +95,7 @@ namespace FireRosterMVC.Controllers
         }
 
         // GET: Location/Delete/5
+        [Authorize(Roles="Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -110,6 +113,7 @@ namespace FireRosterMVC.Controllers
         // POST: Location/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Location location = await db.Locations.FindAsync(id);
@@ -118,6 +122,7 @@ namespace FireRosterMVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         protected override void Dispose(bool disposing)
         {
             if (disposing)

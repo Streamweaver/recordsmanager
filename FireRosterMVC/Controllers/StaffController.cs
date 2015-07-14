@@ -17,7 +17,7 @@ using FireRosterMVC.ViewModels;
 
 namespace FireRosterMVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Manager, Payroll, Training")]
     public class StaffController : Controller
     {
         private FireRosterDB db;
@@ -262,6 +262,7 @@ namespace FireRosterMVC.Controllers
         }
 
         // GET: Staff/Delete/5
+        [Authorize(Roles="Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -279,6 +280,7 @@ namespace FireRosterMVC.Controllers
         // POST: Staff/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Staff Staff = await db.StaffList.FindAsync(id);
@@ -287,6 +289,7 @@ namespace FireRosterMVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         protected override void Dispose(bool disposing)
         {
             if (disposing)

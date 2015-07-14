@@ -185,6 +185,9 @@
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\LocationGroupController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OvertimeAvailabilityController.cs" />
+    <Compile Include="Controllers\OvertimeCodeController.cs" />
+    <Compile Include="Controllers\OvertimeController.cs" />
     <Compile Include="Controllers\PhoneController.cs" />
     <Compile Include="Controllers\PhoneTypeController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
@@ -198,6 +201,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Enums\Activestatus.cs" />
+    <Compile Include="Enums\OvertimeStatus.cs" />
+    <Compile Include="Enums\RecordAction.cs" />
     <Compile Include="Enums\PositionStates.cs" />
     <Compile Include="Enums\Shift.cs" />
     <Compile Include="Global.asax.cs">
@@ -299,11 +304,29 @@
     <Compile Include="Migrations\201505281903507_AddIdentityRoles.Designer.cs">
       <DependentUpon>201505281903507_AddIdentityRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506031735510_CreateAuditModel.cs" />
+    <Compile Include="Migrations\201506031735510_CreateAuditModel.Designer.cs">
+      <DependentUpon>201506031735510_CreateAuditModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506041256235_UpdateAudit.cs" />
+    <Compile Include="Migrations\201506041256235_UpdateAudit.Designer.cs">
+      <DependentUpon>201506041256235_UpdateAudit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506191827481_AddOvertimeCodeModel.cs" />
+    <Compile Include="Migrations\201506191827481_AddOvertimeCodeModel.Designer.cs">
+      <DependentUpon>201506191827481_AddOvertimeCodeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507011716034_AddOvertime.cs" />
+    <Compile Include="Migrations\201507011716034_AddOvertime.Designer.cs">
+      <DependentUpon>201507011716034_AddOvertime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Audit.cs" />
     <Compile Include="Models\Codes\CareerDevelopmentLevel.cs" />
+    <Compile Include="Models\Codes\OvertimeCode.cs" />
     <Compile Include="Models\EmergencyContact.cs" />
     <Compile Include="Models\FireRosterDB.cs" />
     <Compile Include="Models\Codes\Gender.cs" />
@@ -311,6 +334,8 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Codes\LocationGroup.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Overtime.cs" />
+    <Compile Include="Models\OvertimeAvailability.cs" />
     <Compile Include="Models\Phone.cs" />
     <Compile Include="Models\Codes\PhoneType.cs" />
     <Compile Include="Models\Position.cs" />
@@ -474,6 +499,7 @@
     <None Include="Content\bootstrap\bootstrap.less" />
     <None Include="Content\bootstrap\badges.less" />
     <None Include="Content\bootstrap\alerts.less" />
+    <None Include="Properties\PublishProfiles\Mars.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\FireRosterDatePicker.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -678,6 +704,21 @@
     <Content Include="Views\Shared\_ListActionsPartial.cshtml" />
     <Content Include="Views\Shared\_EditFooterPartial.cshtml" />
     <Content Include="Views\Shared\_DetailsFooterPartial.cshtml" />
+    <Content Include="Views\OvertimeCode\Create.cshtml" />
+    <Content Include="Views\OvertimeCode\Delete.cshtml" />
+    <Content Include="Views\OvertimeCode\Details.cshtml" />
+    <Content Include="Views\OvertimeCode\Edit.cshtml" />
+    <Content Include="Views\OvertimeCode\Index.cshtml" />
+    <Content Include="Views\OvertimeAvailability\Create.cshtml" />
+    <Content Include="Views\OvertimeAvailability\Delete.cshtml" />
+    <Content Include="Views\OvertimeAvailability\Details.cshtml" />
+    <Content Include="Views\OvertimeAvailability\Edit.cshtml" />
+    <Content Include="Views\OvertimeAvailability\Index.cshtml" />
+    <Content Include="Views\Overtime\Create.cshtml" />
+    <Content Include="Views\Overtime\Delete.cshtml" />
+    <Content Include="Views\Overtime\Details.cshtml" />
+    <Content Include="Views\Overtime\Edit.cshtml" />
+    <Content Include="Views\Overtime\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -763,6 +804,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505281903507_AddIdentityRoles.resx">
       <DependentUpon>201505281903507_AddIdentityRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506031735510_CreateAuditModel.resx">
+      <DependentUpon>201506031735510_CreateAuditModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506041256235_UpdateAudit.resx">
+      <DependentUpon>201506041256235_UpdateAudit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506191827481_AddOvertimeCodeModel.resx">
+      <DependentUpon>201506191827481_AddOvertimeCodeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507011716034_AddOvertime.resx">
+      <DependentUpon>201507011716034_AddOvertime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

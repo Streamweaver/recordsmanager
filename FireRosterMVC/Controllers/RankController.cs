@@ -11,18 +11,20 @@ using FireRosterMVC.Models;
 
 namespace FireRosterMVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Manager")]
     public class RankController : Controller
     {
         private FireRosterDB db = new FireRosterDB();
 
         // GET: Rank
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             return View(await db.Ranks.OrderBy(r => r.Order).ToListAsync());
         }
 
         // GET: Rank/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
